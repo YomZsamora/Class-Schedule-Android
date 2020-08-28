@@ -1,4 +1,4 @@
-package com.example.back.fragments;
+package com.moringa.class_schedule_app.fragments.;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
