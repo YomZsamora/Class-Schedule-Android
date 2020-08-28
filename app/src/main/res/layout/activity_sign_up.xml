@@ -110,7 +110,7 @@
             android:text="signup"
             android:textColor="#fff"
             android:textSize="22sp"
-            android:onClick="verify"
+            android:onClick="pass"
             android:background="@drawable/outline_curved"/>
 
     </LinearLayout>

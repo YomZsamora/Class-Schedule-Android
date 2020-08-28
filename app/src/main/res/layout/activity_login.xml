@@ -47,7 +47,7 @@
             android:background="@drawable/outline_curved"
             android:backgroundTint="#673AB7"
             android:text="login"
-            android:onClick="login"
+            android:id="@+id/loginbtn"
             android:textColor="#313131"
             android:textSize="22sp" />
 
