@@ -11,11 +11,11 @@ import androidx.fragment.app.Fragment;
 
 import com.example.back.R;
 
-public class FragmentContact extends Fragment {
+public class FragmentExtras extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.fragment_contact,container,false);
+        View v=inflater.inflate(R.layout.fragment_extras,container,false);
         return v;
     }
 }
