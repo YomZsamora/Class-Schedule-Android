@@ -1,4 +1,5 @@
-package com.example.back;
+package com.moringa.class_schedule_app.ui;
+
 
 import android.os.Bundle;
 
@@ -10,11 +11,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
-import com.example.back.ui.main.SectionsPagerAdapter;
+import com.moringa.class_schedule_app.R;
+import com.moringa.class_schedule_app.ui.main.SectionsPagerAdapter;
 
 public class Main extends AppCompatActivity {
     Toolbar toolbar;

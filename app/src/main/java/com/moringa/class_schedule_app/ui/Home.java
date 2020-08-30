@@ -1,4 +1,4 @@
-package com.example.back;
+package com.moringa.class_schedule_app.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -7,11 +7,12 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 
 import com.example.back.Adapters.ViewAdapter;
-import com.example.back.fragments.FragmentContact;
 import com.example.back.fragments.FragmentExtras;
 import com.example.back.fragments.FragmentHome;
 import com.example.back.fragments.FragmentNotification;
 import com.google.android.material.tabs.TabLayout;
+import com.moringa.class_schedule_app.R;
+import com.moringa.class_schedule_app.fragments.FragmentContact;
 
 import java.util.ArrayList;
 

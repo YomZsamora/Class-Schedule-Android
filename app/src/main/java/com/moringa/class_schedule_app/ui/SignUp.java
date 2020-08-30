@@ -1,4 +1,4 @@
-package com.moringa.class_schedule_app.ui.;
+package com.moringa.class_schedule_app.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.moringa.class_schedule_app.Home;
 import com.moringa.class_schedule_app.R;
 import com.moringa.class_schedule_app.fireModel.Fmodel;
 import com.moringa.class_schedule_app.popup.Popup;
