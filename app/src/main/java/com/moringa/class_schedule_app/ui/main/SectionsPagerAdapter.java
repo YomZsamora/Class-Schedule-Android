@@ -10,7 +10,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.moringa.class_schedule_app.R;
 import com.moringa.class_schedule_app.fragments.FragmentContact;
-import com.moringa.class_schedule_app.fragments.FragmentExtras;
 import com.moringa.class_schedule_app.fragments.FragmentHome;
 import com.moringa.class_schedule_app.fragments.FragmentNotification;
 
@@ -21,7 +20,7 @@ import com.moringa.class_schedule_app.fragments.FragmentNotification;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3,R.string.tab_text_4};
+    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3};
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -40,11 +39,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 fragment=new FragmentContact();
                 break;
             case 2:
-                fragment=new FragmentExtras();
-                break;
-            case 3:
                 fragment=new FragmentNotification();
                 break;
+
 
         }return fragment;
     }
@@ -57,7 +54,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        // Show 4 total pages.
-        return 4;
+        // Show 3 total pages.
+        return 3;
     }
 }
