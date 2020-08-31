@@ -26,7 +26,6 @@
         app:tabIndicatorColor="@color/blue"
         app:tabSelectedTextColor="@color/blue"
         app:tabTextColor="@color/textgrey"
-        app:tabMode="scrollable"
         app:tabIndicatorHeight="3dp"
         android:layout_below="@id/mytoolbar"
         android:background="@color/white" />
