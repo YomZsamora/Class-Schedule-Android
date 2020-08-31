@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,6 +14,7 @@
         app:logo="@drawable/ic_local_library_black_24dp"
         app:titleMarginStart="30dp"
         app:elevation="0dp"
+        android:layout_alignParentTop="true"
         android:background="@color/white"/>
 
 
@@ -25,12 +26,14 @@
         app:tabIndicatorColor="@color/blue"
         app:tabSelectedTextColor="@color/blue"
         app:tabTextColor="@color/textgrey"
+        app:tabMode="scrollable"
         app:tabIndicatorHeight="3dp"
+        android:layout_below="@id/mytoolbar"
         android:background="@color/white" />
-
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
+        android:layout_below="@id/tabs"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
@@ -41,6 +44,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:background="@color/blue"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
-</LinearLayout>
+        android:backgroundTint="@color/light_blue"
+        app:srcCompat="@drawable/ic_baseline_add_circle_24"
+        />
+</RelativeLayout>

@@ -1,4 +1,5 @@
-package com.example.back.fragments;
+package com.moringa.class_schedule_app.fragments;
+
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.back.R;
+import com.moringa.class_schedule_app.R;
+
 
 public class FragmentHome extends Fragment {
     @Nullable

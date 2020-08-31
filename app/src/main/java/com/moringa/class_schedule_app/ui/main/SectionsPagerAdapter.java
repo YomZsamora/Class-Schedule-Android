@@ -10,6 +10,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.moringa.class_schedule_app.R;
 import com.moringa.class_schedule_app.fragments.FragmentContact;
+import com.moringa.class_schedule_app.fragments.FragmentExtras;
+import com.moringa.class_schedule_app.fragments.FragmentHome;
+import com.moringa.class_schedule_app.fragments.FragmentNotification;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -31,16 +34,16 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         Fragment fragment=null;
         switch (position){
             case 0:
-                fragment= new com.example.back.fragments.FragmentHome();
+                fragment= new FragmentHome();
                 break;
             case 1:
                 fragment=new FragmentContact();
                 break;
             case 2:
-                fragment=new com.example.back.fragments.FragmentExtras();
+                fragment=new FragmentExtras();
                 break;
             case 3:
-                fragment=new com.example.back.fragments.FragmentNotification();
+                fragment=new FragmentNotification();
                 break;
 
         }return fragment;

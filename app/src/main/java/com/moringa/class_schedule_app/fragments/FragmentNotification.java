@@ -1,4 +1,5 @@
-package com.example.back.fragments;
+package com.moringa.class_schedule_app.fragments;
+
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,13 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.back.R;
+import com.moringa.class_schedule_app.R;
+
 
 public class FragmentNotification extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.fragment_notification,container,false);
+        View v=inflater.inflate(R.layout.fragment_notifications,container,false);
         return v;
     }
 }

@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.moringa.class_schedule_app.R;
 import com.moringa.class_schedule_app.fireModel.Fmodel;
 import com.moringa.class_schedule_app.popup.Popup;
@@ -34,6 +36,7 @@ public class SignUp extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authStateListener;
     Fmodel fmodel;
     DatabaseReference databaseReference;
+    Button login,validate;
     EditText name, password, email, cohort;
     String vname, vpassword, vemail, vcohort;
     String emailFormat = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -43,16 +46,19 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_sign_up);
-        Button login = findViewById(R.id.kill_account);
         mAuth = FirebaseAuth.getInstance();
 
         //auth listener
         mAuth = FirebaseAuth.getInstance();
+
         //attach to view ids
+        login = findViewById(R.id.kill_account);
+        validate=findViewById(R.id.validate_btn);
         name = findViewById(R.id.sign_name);
         password = findViewById(R.id.sign_password);
         email = findViewById(R.id.sign_email);
         cohort = findViewById(R.id.sign_cohort);
+
         progressDialog = new ProgressDialog(SignUp.this);
 
         //moves to the login activity
@@ -64,19 +70,32 @@ public class SignUp extends AppCompatActivity {
             }
         });
 
-        if (mAuth.getCurrentUser()!=null){
-            startActivity(new Intent(SignUp.this, Home.class));
-        }
+        //validate_btn call to validate method ,see below
+        validate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                verify();
+            }
+        });
 
-
+        //auth listener
+        authStateListener=new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user= firebaseAuth.getCurrentUser();
+                if (user!=null){
+                    Log.d(TAG,"onAuthChanged:signed_in:" + user.getUid());
+                    startActivity(new Intent(SignUp.this,Main.class));
+                }else{
+                    Log.d(TAG,"onAuthChanged:signed_out:");
+                }
+            }
+        };
     }
 
-    //create account method
+    //create account method but with email and password verification in firebase
     private void createAccount(String email, String password) {
-        progressDialog.setTitle("Creating account");
-        progressDialog.setMessage("creating your account ....");
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.show();
+
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -97,8 +116,8 @@ public class SignUp extends AppCompatActivity {
         popup.show(getSupportFragmentManager(), "popup");
     }
 
-    // onclick method for the signup button .contains firebase verification;
-    public void verify(View view) {
+    // onclick method for the sign up button .contains firebase verification;
+    public void verify() {
         if (name.getText().toString().isEmpty() || password.getText().toString().isEmpty() || email.getText().toString().isEmpty() || cohort.getText().toString().isEmpty()) {
             Toast.makeText(this, "please fill out all fields", Toast.LENGTH_SHORT).show();
         } else {
@@ -106,31 +125,19 @@ public class SignUp extends AppCompatActivity {
                 email.setError("invalid email");
                 Toast.makeText(this, "enter a valid email", Toast.LENGTH_SHORT).show();
             } else {
-                //find string values of input fields
+                //show loading dialog
+                progressDialog.setTitle("Creating account");
+                progressDialog.setMessage("creating your account ....");
+                progressDialog.setCanceledOnTouchOutside(false);
+                progressDialog.show();
+
+                //find string values of input fields,the v is for validated
                 vname = name.getText().toString();
                 vpassword = password.getText().toString();
                 vemail = email.getText().toString();
                 vcohort = cohort.getText().toString();
 
-                //firebase create account using email and password
-                progressDialog.setTitle("Creating account");
-                progressDialog.setMessage("creating your account ....");
-                progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.show();
-                mAuth.createUserWithEmailAndPassword(vemail, vpassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            progressDialog.dismiss();
-                            Toast.makeText(SignUp.this, "account created", Toast.LENGTH_SHORT).show();
-                        } else {
-                            progressDialog.dismiss();
-                            popup("Failed", "could not connect to network");
-                        }
-                    }
-                });
-
-                //firebase connection
+                //firebase connection query
                 databaseReference = FirebaseDatabase.getInstance().getReference("users");
                 fmodel = new Fmodel(vname, vpassword, vemail, vcohort);
                 Query query = databaseReference.orderByChild("name").equalTo(vname);
@@ -139,20 +146,24 @@ public class SignUp extends AppCompatActivity {
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        progressDialog.dismiss();
+                        Toast.makeText(SignUp.this, "signed in", Toast.LENGTH_SHORT).show();
                         name.setText("");
                         password.setText("");
                         email.setText("");
                         cohort.setText("");
                         databaseReference.child(vname).setValue(fmodel);
+
+                        //move to main.class
+                        startActivity(new Intent(SignUp.this,Main.class));
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
+                        //if it fails ...
                         popup("error", "a network error occurred , check your connection and try again");
                     }
                 });
-
-
             }
         }
     }

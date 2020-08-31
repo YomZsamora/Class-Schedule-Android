@@ -1,4 +1,4 @@
-package com.example.back.Adapters;
+package com.moringa.class_schedule_app.Adapters;
 
 import android.content.Context;
 import android.util.AttributeSet;

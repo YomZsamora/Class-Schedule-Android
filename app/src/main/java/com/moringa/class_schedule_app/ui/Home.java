@@ -6,13 +6,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
-import com.example.back.Adapters.ViewAdapter;
-import com.example.back.fragments.FragmentExtras;
-import com.example.back.fragments.FragmentHome;
-import com.example.back.fragments.FragmentNotification;
 import com.google.android.material.tabs.TabLayout;
+import com.moringa.class_schedule_app.Adapters.ViewAdapter;
 import com.moringa.class_schedule_app.R;
 import com.moringa.class_schedule_app.fragments.FragmentContact;
+import com.moringa.class_schedule_app.fragments.FragmentExtras;
+import com.moringa.class_schedule_app.fragments.FragmentHome;
+import com.moringa.class_schedule_app.fragments.FragmentNotification;
 
 import java.util.ArrayList;
 
