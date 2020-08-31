@@ -36,11 +36,11 @@ public class ListAdapter extends ArrayAdapter<SetData> {
         @SuppressLint("ViewHolder") View view= layoutInflater.inflate(resource,null,false);
         TextView avname= view.findViewById(R.id.avTitle);
         TextView avemail= view.findViewById(R.id.avtm);
-        ImageView avimage= view.findViewById(R.id.avdesc);
+        TextView avimage= view.findViewById(R.id.avdesc);
         SetData setDatanew=setData.get(position);
         avname.setText(setDatanew.getTitle());
         avemail.setText(setDatanew.getTm());
-        Picasso.get().load(setDatanew.getDesc()).into(avimage);
+        avimage.setText(setDatanew.getDesc());
         return view;
     }
 }

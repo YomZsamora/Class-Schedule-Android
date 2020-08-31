@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.moringa.class_schedule_app.R;
+import com.moringa.class_schedule_app.fireModel.ListAdapter;
 import com.moringa.class_schedule_app.fireModel.SetData;
 
 import java.util.ArrayList;
@@ -24,12 +24,22 @@ public class FragmentHome extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root=inflater.inflate(R.layout.fragment_home,container,false);
-
         ListView mlist=root.findViewById(R.id.mylist);
         List<SetData> setData;
         setData=new ArrayList<>();
         setData.add(new SetData("meeting","james","There will be a meeting at 10.45 today for all mc 40 students"));
-        ListAdapter listAdapter=new ListAdapter(getContext(),R.layout.list_item,setData);
+        setData.add(new SetData("stand up","samora","There will be a meeting at 10.45 today for all mc 40 students"));
+        setData.add(new SetData("checkin","christine","There will be a meeting at 10.45 today for all mc 40 students"));
+        setData.add(new SetData("meeting","james","There will be a meeting at 10.45 today for all mc 40 students"));
+        setData.add(new SetData("stand up","samora","There will be a meeting at 10.45 today for all mc 40 students"));
+        setData.add(new SetData("checkin","christine","There will be a meeting at 10.45 today for all mc 40 students"));
+        setData.add(new SetData("meeting","james","There will be a meeting at 10.45 today for all mc 40 students"));
+        setData.add(new SetData("stand up","samora","There will be a meeting at 10.45 today for all mc 40 students"));
+        setData.add(new SetData("checkin","christine","There will be a meeting at 10.45 today for all mc 40 students"));
+        setData.add(new SetData("meeting","james","There will be a meeting at 10.45 today for all mc 40 students"));
+        setData.add(new SetData("stand up","samora","There will be a meeting at 10.45 today for all mc 40 students"));
+        setData.add(new SetData("checkin","christine","There will be a meeting at 10.45 today for all mc 40 students"));
+        com.moringa.class_schedule_app.fireModel.ListAdapter listAdapter=new ListAdapter(getContext(),R.layout.list_item,setData);
         mlist.setAdapter(listAdapter);
         return root;
     }
