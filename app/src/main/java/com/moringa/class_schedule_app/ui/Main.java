@@ -25,6 +25,7 @@ import com.moringa.class_schedule_app.ui.main.SectionsPagerAdapter;
 public class Main extends AppCompatActivity {
     Toolbar toolbar;
     SharedPreferences sp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,54 +35,51 @@ public class Main extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
-        toolbar=findViewById(R.id.mytoolbar);
+        toolbar = findViewById(R.id.mytoolbar);
         setSupportActionBar(toolbar);
 
         //get shared preferences
-        sp=getApplicationContext().getSharedPreferences("users",MODE_PRIVATE);
-        String nameStr=sp.getString("sharedName","");
-        String emailStr=sp.getString("sharedEmail","");
+        sp = getApplicationContext().getSharedPreferences("users", MODE_PRIVATE);
+        String nameStr = sp.getString("sharedName", "");
+        String emailStr = sp.getString("sharedEmail", "");
 
-        if (!nameStr.equals("") || !nameStr.isEmpty()){
+        if (!nameStr.equals("") || !nameStr.isEmpty()) {
             toolbar.setTitle(nameStr);
         }
-
-
-
 
         //floating action button
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
+                startActivity(new Intent(Main.this,Post.class));
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
             }
         });
     }
 
-
+    //adds the menu items to our appbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_view,menu);
+        getMenuInflater().inflate(R.menu.search_view, menu);
         return true;
     }
-
+    //switch statement for onclick menu items
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id=item.getItemId();
-        switch (id){
+        int id = item.getItemId();
+        switch (id) {
             case R.id.search_menu:
-                Intent i=new Intent(Main.this,Search.class);
+                Intent i = new Intent(Main.this, Search.class);
                 startActivity(i);
                 break;
             case R.id.logout_menu:
                 Toast.makeText(this, "logging out", Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(Main.this,SignUp.class);
+                Intent intent = new Intent(Main.this, SignUp.class);
                 startActivity(intent);
                 break;
-
-        }return true;
+        }
+        return true;
     }
 }
