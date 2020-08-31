@@ -6,33 +6,43 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".ui.Main">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/mytoolbar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:title="Classroom"
-        app:logo="@drawable/ic_local_library_black_24dp"
-        app:titleMarginStart="30dp"
-        app:elevation="0dp"
+    <LinearLayout
         android:layout_alignParentTop="true"
-        android:background="@color/white"/>
-
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs"
-        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        android:id="@+id/tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabIndicatorColor="@color/blue"
-        app:tabSelectedTextColor="@color/blue"
-        app:tabTextColor="@color/textgrey"
-        app:tabIndicatorHeight="3dp"
-        android:layout_below="@id/mytoolbar"
-        android:background="@color/white" />
+        app:elevation="10dp"
+        android:elevation="10dp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/mytoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:title="Classroom"
+            app:logo="@drawable/ic_local_library_black_24dp"
+            app:titleMarginStart="30dp"
+            app:titleTextColor="@color/textgrey"
+            app:elevation="0dp"
+            android:background="@color/white"/>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:theme="@style/ThemeOverlay.AppCompat.Light"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabIndicatorColor="@color/light_blue"
+            app:tabSelectedTextColor="@color/light_blue"
+            app:tabTextColor="@color/textgreylight"
+            app:tabIndicatorHeight="3dp"
+            android:layout_below="@id/mytoolbar"
+            android:background="@color/white" />
+    </LinearLayout>
+
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
-        android:layout_below="@id/tabs"
+        android:layout_below="@id/tab"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
@@ -46,8 +56,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-        android:background="@color/blue"
-        android:backgroundTint="@color/light_blue"
+        android:background="@color/textgrey"
+        android:backgroundTint="@color/textgrey"
         app:srcCompat="@drawable/ic_baseline_add_circle_24"
         />
 </RelativeLayout>

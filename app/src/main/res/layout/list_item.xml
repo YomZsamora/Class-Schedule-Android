@@ -6,7 +6,8 @@
     android:padding="5dp"
     android:background="@drawable/rounded_corners"
     android:backgroundTint="@color/white"
-    app:elevation="6dp"
+    app:elevation="0dp"
+    android:layout_marginBottom="5dp"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -14,7 +15,7 @@
         android:id="@+id/hrz"
         android:paddingBottom="5dp"
         android:background="@drawable/rounded_corners"
-        android:backgroundTint="@color/blue"
+        android:backgroundTint="@color/light_blue"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:layout_height="wrap_content">
@@ -41,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="technical mentor"
-            android:textColor="@color/white"
+            android:textColor="@color/cream"
             android:textSize="14sp"/>
 
     </LinearLayout>
@@ -52,7 +53,7 @@
             android:layout_alignParentRight="true"
             android:layout_gravity="end"
             android:layout_marginRight="5dp"
-            android:backgroundTint="@color/blue"
+            android:backgroundTint="@android:color/transparent"
             android:src="@drawable/ic_baseline_add_circle_24"
             android:tint="@color/white" />
     </RelativeLayout>
@@ -61,10 +62,10 @@
         android:layout_below="@id/hrz"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="17dp"
-        android:paddingEnd="17dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:textSize="16sp"
         android:text="description"
         android:textColor="@color/textgreylight"

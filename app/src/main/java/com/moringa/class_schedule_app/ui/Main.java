@@ -41,7 +41,11 @@ public class Main extends AppCompatActivity {
         sp=getApplicationContext().getSharedPreferences("users",MODE_PRIVATE);
         String nameStr=sp.getString("sharedName","");
         String emailStr=sp.getString("sharedEmail","");
-        toolbar.setTitle(nameStr);
+
+        if (!nameStr.equals("") || !nameStr.isEmpty()){
+            toolbar.setTitle(nameStr);
+        }
+
 
 
 
