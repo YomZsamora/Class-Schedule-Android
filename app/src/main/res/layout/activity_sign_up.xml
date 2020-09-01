@@ -118,11 +118,12 @@
 
         <Button
             android:id="@+id/signup_btn"
+            android:textAllCaps="false"
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            android:text="signup"
+            android:text="Sign up"
             android:textColor="#fff"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:background="@drawable/outline_curved"/>
 
     </LinearLayout>
@@ -132,23 +133,21 @@
         android:orientation="horizontal"
         android:layout_below="@id/sign_holder"
         android:paddingHorizontal="15dp"
-        android:gravity="center"
-        >
+        android:gravity="center">
         <TextView
+            android:id="@+id/toLoginTextView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#fff"
-            android:text="new here ?"
-            android:textSize="21sp"/>
-        <Button
-            android:id="@+id/kill_account"
+            android:text="Already have an account? "
+            android:textSize="14sp"/>
+        <TextView
+            android:id="@+id/toLoginTextView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:background="#00000000"
-            android:textSize="19sp"
-            android:textColor="#00BCD4"
-            android:text="login"/>
+            android:textColor="#fff"
+            android:text="Log in"
+            android:textSize="14sp"/>
 
     </LinearLayout>
 </RelativeLayout>
