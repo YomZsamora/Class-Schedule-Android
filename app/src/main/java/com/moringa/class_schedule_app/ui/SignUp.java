@@ -87,7 +87,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if(view == mSignUpButton) {
-            verify();
+            //verify(); hold this for now
+            createAccount();
         }
         if (view  == mToLoginTextView1 || view == mToLoginTextView2) {
             Intent intent = new Intent(SignUp.this, Login.class);
@@ -132,17 +133,28 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     }
 
     //create account method but with email and password verification in firebase
-    private void createAccount(String email, String password) {
+    private void createAccount() {
+        String username = mName.getText().toString().trim();
+        String email = mEmail.getText().toString().trim();
+        String password = mPassword.getText().toString().trim();
+        String confirmPassword = mName.getText().toString().trim();
 
+        //calling the form validation methods
+        boolean validEmail = isValidEmail(email);
+        boolean validName = isValidName(username);
+        boolean validPassword = isValidPassword(password, confirmPassword);
+        if (!validEmail || !validName || !validPassword) return; //this return statements halts createNewUser method and errors are displayed
+
+        progressDialog.show();
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     progressDialog.dismiss();
-                    Toast.makeText(SignUp.this, "account created", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUp.this, "Account created", Toast.LENGTH_SHORT).show();
                 } else {
                     progressDialog.dismiss();
-                    popup("Failed", "could not connect to network");
+                    popup("Failed", "Could not connect to network");
                 }
             }
         });
@@ -204,5 +216,35 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 });
             }
         }
+    }
+
+    //form validation
+    private boolean isValidEmail(String email) {
+        boolean isGoodEmail =
+                (email != null && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches());
+        if (!isGoodEmail) {
+            mEmail.setError("Please enter a valid email address");
+            return false;
+        }
+        return isGoodEmail;
+    }
+
+    private boolean isValidName(String name) {
+        if (name.equals("")) {
+            mName.setError("Please enter your name");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isValidPassword(String password, String confirmPassword) {
+        if (password.length() < 6) {
+            mPassword.setError("Please create a password containing at least 6 characters");
+            return false;
+        } else if (!password.equals(confirmPassword)) {
+            mConfirmPassword.setError("Passwords do not match");
+            return false;
+        }
+        return true;
     }
 }
