@@ -77,8 +77,29 @@ public class SignUp extends AppCompatActivity {
                 verify();
             }
         });
+        //fire this method to check auth state when activity is created
+        createAuthStateListener();
+    }
 
-        //auth listener
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //essential for the auth state listener to work
+        mAuth.addAuthStateListener(authStateListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //stop firebase from listening to the auth after activity stops, prevents memory leaks
+        //and frees up processor workload
+        if (authStateListener != null) {
+            mAuth.removeAuthStateListener(authStateListener);
+        }
+    }
+
+    //logic to check app's auth state
+    private void createAuthStateListener() {
         authStateListener=new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
