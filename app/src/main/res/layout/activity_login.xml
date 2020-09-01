@@ -64,6 +64,7 @@
         android:paddingHorizontal="15dp">
 
         <TextView
+            android:id="@+id/toSignUpTextView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Don't have an account?"
@@ -71,7 +72,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/login"
+            android:id="@+id/toSignUpTextView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
