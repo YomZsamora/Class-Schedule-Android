@@ -42,6 +42,17 @@ public class SignUp extends AppCompatActivity {
     DatabaseReference databaseReference;
     //get views with ButterKnife
     @BindView(R.id.signup_btn)
+    Button mSignUpButton;
+    @BindView(R.id.sign_name)
+    EditText mName;
+    @BindView(R.id.sign_email)
+    EditText mEmail;
+    @BindView(R.id.sign_password)
+    EditText mPassword;
+    @BindView(R.id.confirm-app)
+    EditText mName;
+    @BindView(R.id.sign_name)
+    EditText mName;
     Button login,validate;
     EditText name, password, email, cohort;
     String vname, vpassword, vemail, vcohort;
