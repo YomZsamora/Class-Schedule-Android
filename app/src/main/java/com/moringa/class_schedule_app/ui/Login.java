@@ -4,24 +4,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Binder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.moringa.class_schedule_app.R;
 import com.moringa.class_schedule_app.fireModel.Fmodel;
 import com.moringa.class_schedule_app.popup.Popup;
@@ -54,7 +49,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     String vemail, vpass;
     SharedPreferences sharedPreferences;
     private FirebaseAuth mAuth;
-    ProgressDialog p;
+    ProgressDialog mProgressDialog;
     Button login;
     private FirebaseAuth.AuthStateListener authStateListener;
     private static final String TAG = Login.class.getSimpleName();
@@ -70,7 +65,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 //        Button kill_login = findViewById(R.id.kill_login);
 //        email = findViewById(R.id.login_email);
 //        password = findViewById(R.id.login_password);
-        p = new ProgressDialog(Login.this);
+        createAuthProgressDialog();
         mAuth = FirebaseAuth.getInstance();
 //        login = findViewById(R.id.loginbtn);
 
@@ -86,7 +81,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view == mLoginButton) {
-            login();
+            firebaseLogin();
         }
         if (view == mSignUpTextView1 || view == mSignUpTextView2){
             Intent intent = new Intent(Login.this, SignUp.class);
@@ -190,27 +185,40 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 //            });
 //
 //        }
-    }
+//    }
     //firebase login with email and password
     public void firebaseLogin(){
-        mAuth.signInWithEmailAndPassword(vemail, vpass)
+        String email = mEmail.getText().toString().trim();
+        String password = mPassword.getText().toString().trim();
+        //calling the form validation methods
+        boolean validEmail = isValidEmail(email);
+        boolean validPassword = isValidPassword(password);
+        if (!validEmail || !validPassword) return;
+
+        mProgressDialog.show();
+        mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            p.dismiss();
+                            mProgressDialog.dismiss();
                             Log.d(TAG, "signInWithEmail:success");
                             startActivity(new Intent(Login.this, Main.class));
 
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            p.dismiss();
+                            mProgressDialog.dismiss();
                             popup("ooops...", "something went wrong");
-                            startActivity(new Intent(Login.this, Main.class));
                         }
                     }
                 });
+    }
+
+    private void createAuthProgressDialog() {
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage("Authenticating ...");
+        mProgressDialog.setCancelable(false);
     }
 
     //form validation
@@ -218,7 +226,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         boolean isGoodEmail =
                 (email != null && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches());
         if (!isGoodEmail) {
-            mEmailAddress.setError("Please enter a valid email address");
+            mEmail.setError("Please enter a valid email address");
             return false;
         }
         return isGoodEmail;
