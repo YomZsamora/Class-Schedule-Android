@@ -30,9 +30,10 @@ import butterknife.ButterKnife;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
-    //firebase auth
+    //firebase auth requirements
     FirebaseDatabase fb;
     DatabaseReference databaseReference;
+    private FirebaseAuth mAuth;
     //get views
     @BindView(R.id.login_email)
     EditText mEmail;
@@ -48,7 +49,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     Fmodel fmodel;
     String vemail, vpass;
     SharedPreferences sharedPreferences;
-    private FirebaseAuth mAuth;
     ProgressDialog mProgressDialog;
     Button login;
     private FirebaseAuth.AuthStateListener authStateListener;
