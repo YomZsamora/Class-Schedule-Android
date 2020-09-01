@@ -12,22 +12,15 @@
         android:gravity="center_vertical"
         android:layout_above="@id/sign_holder"
         android:padding="10dp">
-        <RelativeLayout
-            android:id="@+id/r_circle"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@drawable/circular_corners"
-            android:layout_margin="10dp"
-            android:backgroundTint="#673AB7"/>
+
         <TextView
-            android:layout_toRightOf="@id/r_circle"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="40dp"
+            android:textSize="30dp"
             android:layout_marginLeft="10dp"
             android:textColor="@android:color/white"
-            android:text="classroom"/>
+            android:text="Create student account"/>
 
     </RelativeLayout>
 
@@ -55,21 +48,6 @@
             android:textSize="17sp"
             android:layout_marginBottom="10dp"
             android:hint="name"/>
-        <EditText
-            android:id="@+id/sign_password"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:textColor="@android:color/white"
-            android:backgroundTint="#242424"
-            android:background="@drawable/input_light_curved"
-            app:elevation="8dp"
-            android:textColorHint="@android:color/white"
-            android:paddingStart="18dp"
-            android:paddingLeft="18dp"
-            android:textSize="17sp"
-            android:layout_marginBottom="10dp"
-            android:hint="password"/>
 
         <EditText
             android:id="@+id/sign_email"
@@ -86,6 +64,7 @@
             android:textSize="17sp"
             android:layout_marginBottom="10dp"
             android:hint="email"/>
+
         <EditText
             android:id="@+id/sign_cohort"
             android:inputType="text"
@@ -104,6 +83,39 @@
             android:paddingRight="15dp"
             android:layout_marginBottom="10dp"
             android:hint="cohort / class"/>
+
+        <EditText
+            android:id="@+id/sign_password"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#242424"
+            android:background="@drawable/input_light_curved"
+            app:elevation="8dp"
+            android:textColorHint="@android:color/white"
+            android:paddingStart="18dp"
+            android:paddingLeft="18dp"
+            android:textSize="17sp"
+            android:layout_marginBottom="10dp"
+            android:hint="password"/>
+
+        <EditText
+            android:id="@+id/confirm-password"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#242424"
+            android:background="@drawable/input_light_curved"
+            app:elevation="8dp"
+            android:textColorHint="@android:color/white"
+            android:paddingStart="18dp"
+            android:paddingLeft="18dp"
+            android:textSize="17sp"
+            android:layout_marginBottom="10dp"
+            android:hint="password"/>
+
         <Button
             android:id="@+id/validate_btn"
             android:layout_width="match_parent"
