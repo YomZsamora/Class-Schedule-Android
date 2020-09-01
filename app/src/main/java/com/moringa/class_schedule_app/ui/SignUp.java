@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseUser;
@@ -28,14 +29,33 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class SignUp extends AppCompatActivity {
-    private static final String TAG = "SignUp";
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class SignUp extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = SignUp.class.getSimpleName();
+    Fmodel fmodel;
+    //firebase requirements
     FirebaseDatabase fb;
     private ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
-    Fmodel fmodel;
     DatabaseReference databaseReference;
+    //get views with ButterKnife
+    @BindView(R.id.signup_btn)
+    Button mSignUpButton;
+    @BindView(R.id.sign_name)
+    EditText mName;
+    @BindView(R.id.sign_email)
+    EditText mEmail;
+    @BindView(R.id.sign_password)
+    EditText mPassword;
+    @BindView(R.id.confirm_password)
+    EditText mConfirmPassword;
+    @BindView(R.id.toLoginTextView1)
+    TextView mToLoginTextView1;
+    @BindView(R.id.toLoginTextView2)
+    TextView mToLoginTextView2;
     Button login,validate;
     EditText name, password, email, cohort;
     String vname, vpassword, vemail, vcohort;
@@ -46,39 +66,58 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_sign_up);
-        mAuth = FirebaseAuth.getInstance();
+        ButterKnife.bind(this);
 
         //auth listener
         mAuth = FirebaseAuth.getInstance();
 
         //attach to view ids
-        login = findViewById(R.id.kill_account);
-        validate=findViewById(R.id.validate_btn);
-        name = findViewById(R.id.sign_name);
-        password = findViewById(R.id.sign_password);
-        email = findViewById(R.id.sign_email);
         cohort = findViewById(R.id.sign_cohort);
 
         progressDialog = new ProgressDialog(SignUp.this);
 
-        //moves to the login activity
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SignUp.this, Login.class));
-                finish();
-            }
-        });
+        //click listeners
+        mSignUpButton.setOnClickListener(this);
+        mToLoginTextView1.setOnClickListener(this);
+        mToLoginTextView2.setOnClickListener(this);
+        //fire this method to check auth state when activity is created
+        createAuthStateListener();
+    }
 
-        //validate_btn call to validate method ,see below
-        validate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                verify();
-            }
-        });
+    @Override
+    public void onClick(View view) {
+        if(view == mSignUpButton) {
+            //verify(); hold this for now
+            createAccount();
+        }
+        if (view  == mToLoginTextView1 || view == mToLoginTextView2) {
+            Intent intent = new Intent(SignUp.this, Login.class);
+            //makes sure the user isn't allowed to go back even with system buttons
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        }
+    }
 
-        //auth listener
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //essential for the auth state listener to work
+        mAuth.addAuthStateListener(authStateListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //stop firebase from listening to the auth after activity stops, prevents memory leaks
+        //and frees up processor workload
+        if (authStateListener != null) {
+            mAuth.removeAuthStateListener(authStateListener);
+        }
+    }
+
+    //logic to check app's auth state
+    private void createAuthStateListener() {
         authStateListener=new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -94,17 +133,28 @@ public class SignUp extends AppCompatActivity {
     }
 
     //create account method but with email and password verification in firebase
-    private void createAccount(String email, String password) {
+    private void createAccount() {
+        String username = mName.getText().toString().trim();
+        String email = mEmail.getText().toString().trim();
+        String password = mPassword.getText().toString().trim();
+        String confirmPassword = mName.getText().toString().trim();
 
+        //calling the form validation methods
+        boolean validEmail = isValidEmail(email);
+        boolean validName = isValidName(username);
+        boolean validPassword = isValidPassword(password, confirmPassword);
+        if (!validEmail || !validName || !validPassword) return; //this return statements halts createNewUser method and errors are displayed
+
+        progressDialog.show();
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     progressDialog.dismiss();
-                    Toast.makeText(SignUp.this, "account created", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUp.this, "Account created", Toast.LENGTH_SHORT).show();
                 } else {
                     progressDialog.dismiss();
-                    popup("Failed", "could not connect to network");
+                    popup("Failed", "Could not connect to network");
                 }
             }
         });
@@ -166,5 +216,35 @@ public class SignUp extends AppCompatActivity {
                 });
             }
         }
+    }
+
+    //form validation
+    private boolean isValidEmail(String email) {
+        boolean isGoodEmail =
+                (email != null && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches());
+        if (!isGoodEmail) {
+            mEmail.setError("Please enter a valid email address");
+            return false;
+        }
+        return isGoodEmail;
+    }
+
+    private boolean isValidName(String name) {
+        if (name.equals("")) {
+            mName.setError("Please enter your name");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isValidPassword(String password, String confirmPassword) {
+        if (password.length() < 6) {
+            mPassword.setError("Please create a password containing at least 6 characters");
+            return false;
+        } else if (!password.equals(confirmPassword)) {
+            mConfirmPassword.setError("Passwords do not match");
+            return false;
+        }
+        return true;
     }
 }
