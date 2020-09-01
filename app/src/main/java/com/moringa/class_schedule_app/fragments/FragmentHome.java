@@ -33,13 +33,10 @@ public class FragmentHome extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root=inflater.inflate(R.layout.fragment_home,container,false);
-        ListView mlist=root.findViewById(R.id.mylist);
+        final ListView mlist=root.findViewById(R.id.mylist);
         final List<SetData> setData=new ArrayList<>();
         ListAdapter listAdapter;
         String baseurl="https://class-schedule-api-moringa.herokuapp.com/";
-
-        setData.add(new SetData("meeting","james","There will be a meeting at 10.45 today for all mc 40 students"));
-        setData.add(new SetData("stand up","samora","There will be a meeting at 10.45 today for all mc 40 students"));
 
 //        retrofit builer
         Retrofit retrofit=new Retrofit.Builder()
@@ -58,15 +55,17 @@ public class FragmentHome extends Fragment {
                     return;
                 }
                 List<SessionsApiModel> posts = response.body();
-
-
+                List<SetData> addData=new ArrayList<>();
 //                loops through each response table adding data to an array being displayed in the listview
                     for (SessionsApiModel posy : posts){
+
                         String title=posy.getSession_name();
                         String desc=posy.getDescription();
                         String tm=posy.getStart_time();
-                        setData.add(new SetData(title,tm,desc));
-                    }
+                        addData.add(new SetData(title,tm,desc));
+
+                    }ListAdapter list=new ListAdapter(getContext(),R.layout.list_item,addData);
+                mlist.setAdapter(list);
 
             }
 
@@ -77,7 +76,7 @@ public class FragmentHome extends Fragment {
         });
 
         listAdapter=new ListAdapter(getContext(),R.layout.list_item,setData);
-        mlist.setAdapter(listAdapter);
+
         return root;
     }
 }
