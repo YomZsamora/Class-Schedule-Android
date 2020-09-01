@@ -28,14 +28,20 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class SignUp extends AppCompatActivity {
-    private static final String TAG = "SignUp";
+    private static final String TAG = SignUp.class.getSimpleName();
+    Fmodel fmodel;
+    //firebase requirements
     FirebaseDatabase fb;
     private ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
-    Fmodel fmodel;
     DatabaseReference databaseReference;
+    //get views with ButterKnife
+    @BindView(R.id.signup_btn)
     Button login,validate;
     EditText name, password, email, cohort;
     String vname, vpassword, vemail, vcohort;
