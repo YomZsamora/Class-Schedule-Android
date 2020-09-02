@@ -1,6 +1,7 @@
 package com.moringa.class_schedule_app.services;
 
 import com.moringa.class_schedule_app.models.SessionsApiResponse;
+import com.moringa.class_schedule_app.models.SessionsModel;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -8,8 +9,12 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface ClassScheduleApi {
+    //SESSIONS TABLE
     @GET("sessions")
     Call<SessionsApiResponse> getSessionList();
+
+    @POST("session/new")
+    Call<SessionsModel> createNewSession();
 
 
    @POST("student/new")
