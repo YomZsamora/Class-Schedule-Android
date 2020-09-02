@@ -2,15 +2,44 @@ package com.moringa.class_schedule_app.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.moringa.class_schedule_app.R;
 
-public class TmSignUpActivity extends AppCompatActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class TmSignUpActivity extends AppCompatActivity implements View.OnClickListener {
+    @BindView(R.id.createAccountButton)
+    Button mCreateAccountButton;
+    @BindView(R.id.logTextView)
+    TextView mLogTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tm_sign_up);
+
+        ButterKnife.bind(this);
+        mCreateAccountButton.setOnClickListener(this);
+        mLogTextView.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == mCreateAccountButton) {
+            Intent intent = new Intent(TmSignUpActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        if (view == mLogTextView) {
+            Intent intent = new Intent(TmSignUpActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }
