@@ -32,8 +32,9 @@ public class TmSignUpActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         if (view == mCreateAccountButton) {
-            Intent intent = new Intent(TmSignUpActivity.this, MainActivity.class);
-            startActivity(intent);
+            //will uncomment this when main activity is done
+//            Intent intent = new Intent(TmSignUpActivity.this, MainActivity.class);
+//            startActivity(intent);
             finish();
         }
         if (view == mLogTextView) {
