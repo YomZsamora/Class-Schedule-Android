@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.moringa.class_schedule_app.R;
 import com.moringa.class_schedule_app.ui.main.SectionsPagerAdapter;
+import com.moringa.class_schedule_app.ui.main.StudentSignUpActivity;
 
 public class Main extends AppCompatActivity {
     Toolbar toolbar;
@@ -76,7 +77,7 @@ public class Main extends AppCompatActivity {
                 break;
             case R.id.logout_menu:
                 Toast.makeText(this, "logging out", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Main.this, SignUp.class);
+                Intent intent = new Intent(Main.this, StudentSignUpActivity.class);
                 startActivity(intent);
                 break;
         }
