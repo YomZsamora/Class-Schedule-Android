@@ -17,7 +17,7 @@ import com.moringa.class_schedule_app.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class StudentSignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class StudentSignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, StudentSignUpActivityInterface {
     @BindView(R.id.createAccountButton)
     Button mCreateAccountButton;
     @BindView(R.id.logTextView)
