@@ -1,4 +1,4 @@
-package com.moringa.class_schedule_app.Adapters;
+package com.moringa.class_schedule_app.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
