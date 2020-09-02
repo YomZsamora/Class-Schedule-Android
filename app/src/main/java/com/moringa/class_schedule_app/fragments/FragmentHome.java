@@ -57,25 +57,28 @@ public class FragmentHome extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
+        getSessionsList();
         return view;
     }
 
     //gather sessions list from api
     private void getSessionsList() {
         ClassScheduleApi client = ClassScheduleClient.getClient();
-        Call<SessionsApiResponse> call = client.getSessionList();
-        call.enqueue(new Callback<SessionsApiResponse>() {
+        Call<List<SessionsModel>> call = client.getSessionList();
+        call.enqueue(new Callback<List<SessionsModel>>() {
             @Override
-            public void onResponse(Call<SessionsApiResponse> call, Response<SessionsApiResponse> response) {
+            public void onResponse(Call<List<SessionsModel>> call, Response<List<SessionsModel>> response) {
                 hideProgressBar();
                 if(response.isSuccessful()){
-                    mSessionsList = response.body().getSessions();
-                    //getActivity() returns the activity associated with a fragment.
-                    //The activity is a context (since Activity extends Context).
-                    mAdapter = new SessionsListAdapter(mSessionsList, getActivity());
-                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+                    mSessionsList = response.body();
+
+                    mAdapter = new SessionsListAdapter(mSessionsList, getContext());
+                    mSessionsRecyclerView.setAdapter(mAdapter);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
                     mSessionsRecyclerView.setLayoutManager(layoutManager);
                     mSessionsRecyclerView.setHasFixedSize(true);
+
+                    Log.d(TAG, String.valueOf(mSessionsList));
                     //toggle the recyclerview visibility
                     showSessionsList();
                 } else {
@@ -85,7 +88,8 @@ public class FragmentHome extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<SessionsApiResponse> call, Throwable t) {
+            public void onFailure(Call<List<SessionsModel>> call, Throwable t) {
+                hideProgressBar();
                 showFailureMessage();
                 Log.d(TAG, "on failure", t);
             }

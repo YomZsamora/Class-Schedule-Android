@@ -11,6 +11,8 @@ import com.moringa.class_schedule_app.models.StudentsApiResponse;
 import com.moringa.class_schedule_app.models.TechnicalMentorApiResponse;
 import com.moringa.class_schedule_app.models.TechnicalMentorModel;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -22,7 +24,7 @@ public interface ClassScheduleApi {
     //SESSIONS TABLE
     //get a list of sessions
     @GET("sessions")
-    Call<SessionsApiResponse> getSessionList();
+    Call<List<SessionsModel>> getSessionList();
     //create new session
     @POST("session/new")
     Call<SessionsModel> createNewSession(
