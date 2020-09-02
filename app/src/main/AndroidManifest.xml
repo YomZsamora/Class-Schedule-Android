@@ -23,8 +23,6 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
-
-        //I don't know what these are
         <activity android:name=".ui.Post" />
         <activity android:name=".ui.Search" />
         <activity

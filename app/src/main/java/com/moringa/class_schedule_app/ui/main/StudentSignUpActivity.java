@@ -2,16 +2,26 @@ package com.moringa.class_schedule_app.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.moringa.class_schedule_app.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class StudentSignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    @BindView(R.id.createAccountButton)
+    Button mCreateAccountButton;
+    @BindView(R.id.logTextView)
+    TextView mLogTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +33,10 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter((adapter));
         spinner.setOnItemSelectedListener(this);
+
+        ButterKnife.bind(this);
+        mCreateAccountButton.setOnClickListener((View.OnClickListener) this);
+        mLogTextView.setOnClickListener((View.OnClickListener) this);
     }
 
     @Override
@@ -33,6 +47,21 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == mCreateAccountButton) {
+            Intent intent = new Intent(StudentSignUpActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        if (view == mLogTextView) {
+            Intent intent = new Intent(StudentSignUpActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
     }
 }
