@@ -18,11 +18,11 @@ public class TechnicalMentorApiResponse {
         this.technicalMentors = technicalMentors;
     }
 
-    public ArrayList<TechnicalMentorModel> getStudents() {
+    public ArrayList<TechnicalMentorModel> getTechnicalMentors() {
         return technicalMentors;
     }
 
-    public void setStudents(ArrayList<TechnicalMentorModel> technicalMentors) {
+    public void setTechnicalMentors(ArrayList<TechnicalMentorModel> technicalMentors) {
         this.technicalMentors = technicalMentors;
     }
 
