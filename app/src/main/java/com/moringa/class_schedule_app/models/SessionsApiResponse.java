@@ -2,7 +2,7 @@ package com.moringa.class_schedule_app.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class SessionsApiModel {
+public class SessionsApiResponse {
     private int id,cohort_id,module_id;
     private String session_name,description,start_time,end_time;
 
