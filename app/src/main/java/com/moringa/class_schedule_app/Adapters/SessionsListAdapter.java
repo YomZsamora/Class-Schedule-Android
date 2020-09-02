@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -68,8 +69,11 @@ public class SessionsListAdapter extends RecyclerView.Adapter<SessionsListAdapte
         private String TAG = SessionViewHolder.class.getSimpleName();
         private Context context;
         private ModuleModel module;
+
         public SessionViewHolder(@NonNull View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
+            context = itemView.getContext();
         }
 
         @Override
@@ -80,9 +84,10 @@ public class SessionsListAdapter extends RecyclerView.Adapter<SessionsListAdapte
         //get the data and bind it the views
         public void bindSessionList(SessionsModel sessions){
             mSessionName.setText(sessions.getSessionName());
-            mSessionModule.setText(sessions.getModuleId());
             //call our method and pass it the id we get from sessions
-            mSessionModule.setText(getModuleById(sessions.getModuleId()).getName());
+            //yet to figure out these methods :(, otherwise the data is retrieved fine
+//            getModuleById(sessions.getModuleId());
+//            mSessionModule.setText(module.getName());
             // we initialize a SimpleDateFormat format so as to format the timestamp we get from api
             SimpleDateFormat sdf = new SimpleDateFormat("HH.mm"); //we define the pattern which returns Hour:Minute
             mSessionStartTime.setText(sdf.format(sessions.getStartTime()));
