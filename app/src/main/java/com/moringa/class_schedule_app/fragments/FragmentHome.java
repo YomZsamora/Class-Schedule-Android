@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.moringa.class_schedule_app.Interfaces.SessionsInterface;
 import com.moringa.class_schedule_app.R;
 import com.moringa.class_schedule_app.fireModel.ListAdapter;
-import com.moringa.class_schedule_app.fireModel.SessionsApiModel;
+import com.moringa.class_schedule_app.models.SessionsApiModel;
 import com.moringa.class_schedule_app.fireModel.SetData;
 
 import java.util.ArrayList;
