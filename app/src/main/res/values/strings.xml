@@ -6,4 +6,16 @@
     <string name="tab_text_2">contact</string>
     <string name="tab_text_3">notification</string>
     <string name="tab_text_4">extras</string>
+    <string name="cohort">Cohort</string>
+
+    <string-array name="cohorts">
+        <item>Cohort</item>
+        <item>MC25</item>
+        <item>MC26</item>
+        <item>MC27</item>
+        <item>MC28</item>
+        <item>MC29</item>
+        <item>MC30</item>
+    </string-array>
+
 </resources>
