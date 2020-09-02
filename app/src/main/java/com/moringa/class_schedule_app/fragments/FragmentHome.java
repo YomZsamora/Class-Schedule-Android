@@ -81,7 +81,7 @@ public class FragmentHome extends Fragment {
         });
     }
 
-    //these method change the views' visibility
+    //these methods change the views' visibility
     private void showSessionsList() {
         mSessionsRecyclerView.setVisibility(View.VISIBLE);
     }
