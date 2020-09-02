@@ -2,10 +2,12 @@ package com.moringa.class_schedule_app.fragments;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,9 +37,12 @@ public class FragmentHome extends Fragment {
     ProgressBar mHomeProgressBar;
     @BindView(R.id.sessionsListRecyclerView)
     RecyclerView mSessionsRecyclerView;
+    @BindView(R.id.homeErrorText)
+    TextView mErrorText;
 
     private List<SessionsModel> mSessionsList;
     private SessionsListAdapter mAdapter;
+    private final static String TAG = FragmentHome.class.getSimpleName();
 
     public FragmentHome() {
     }
@@ -71,14 +76,30 @@ public class FragmentHome extends Fragment {
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
                     mSessionsRecyclerView.setLayoutManager(layoutManager);
                     mSessionsRecyclerView.setHasFixedSize(true);
+                    //toggle the recyclerview visibility
+                    showSessionsList();
+                } else {
+                    hideProgressBar();
+                    showUnsuccessfulMessage();
                 }
             }
 
             @Override
             public void onFailure(Call<SessionsApiResponse> call, Throwable t) {
-
+                showFailureMessage();
+                Log.d(TAG, "on failure", t);
             }
         });
+    }
+
+    private void showFailureMessage() {
+        mErrorText.setText("Something went wrong. Please check your Internet connection and try again later");
+        mErrorText.setVisibility(View.VISIBLE);
+    }
+
+    private void showUnsuccessfulMessage() {
+        mErrorText.setText("Oops, something unexpected happened!");
+        mErrorText.setVisibility(View.VISIBLE);
     }
 
     //these methods change the views' visibility
