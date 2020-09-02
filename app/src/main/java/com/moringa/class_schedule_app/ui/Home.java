@@ -7,8 +7,8 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
-import com.moringa.class_schedule_app.Adapters.ViewAdapter;
 import com.moringa.class_schedule_app.R;
+import com.moringa.class_schedule_app.adapters.ViewAdapter;
 import com.moringa.class_schedule_app.fragments.FragmentContact;
 import com.moringa.class_schedule_app.fragments.FragmentExtras;
 import com.moringa.class_schedule_app.fragments.FragmentHome;

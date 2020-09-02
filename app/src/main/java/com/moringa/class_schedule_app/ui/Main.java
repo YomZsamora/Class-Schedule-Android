@@ -35,17 +35,17 @@ public class Main extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
-        toolbar = findViewById(R.id.mytoolbar);
-        setSupportActionBar(toolbar);
+//        toolbar = findViewById(R.id.mytoolbar);
+//        setSupportActionBar(toolbar);
 
         //get shared preferences
         sp = getApplicationContext().getSharedPreferences("users", MODE_PRIVATE);
         String nameStr = sp.getString("sharedName", "");
         String emailStr = sp.getString("sharedEmail", "");
 
-        if (!nameStr.equals("") || !nameStr.isEmpty()) {
-            toolbar.setTitle(nameStr);
-        }
+//        if (!nameStr.equals("") || !nameStr.isEmpty()) {
+//            toolbar.setTitle(nameStr);
+//        }
 
         //floating action button
         FloatingActionButton fab = findViewById(R.id.fab);

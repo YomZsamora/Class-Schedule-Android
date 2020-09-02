@@ -62,7 +62,7 @@ public class SessionsListAdapter extends RecyclerView.Adapter<SessionsListAdapte
         TextView mSessionModule;
         @BindView(R.id.sessionStartTime)
         TextView mSessionStartTime;
-        @BindView(R.id.sessionStartTime)
+        @BindView(R.id.sessionEndTime)
         TextView mSessionEndTime;
 
         private String TAG = SessionViewHolder.class.getSimpleName();
