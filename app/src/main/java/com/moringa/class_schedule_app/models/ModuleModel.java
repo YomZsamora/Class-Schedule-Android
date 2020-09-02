@@ -3,6 +3,9 @@ package com.moringa.class_schedule_app.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class ModuleModel {
     @SerializedName("name")
     @Expose
