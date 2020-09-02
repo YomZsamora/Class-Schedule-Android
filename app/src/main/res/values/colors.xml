@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#FF477BFF</color>
+    <color name="colorPrimary">#3A86FF</color>
+    <color name="colorPrimaryDark">#222E4E</color>
+    <color name="colorSecondaryLight">#ECECF8</color>
+    <color name="colorSecondary">#BAC4E0</color>
+    <color name="colorSecondaryDark">#8F95A7</color>
 
 <!--custom colors-->
     <color name="red">#F44336</color>
-    <color name="purple">#673AB7</color>
     <color name="blue">#3F51B5</color>
     <color name="light_blue">#2196F3</color>
     <color name="gold">#FF9800</color>

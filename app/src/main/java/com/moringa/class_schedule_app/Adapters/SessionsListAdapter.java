@@ -9,6 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.moringa.class_schedule_app.R;
+import com.moringa.class_schedule_app.models.SessionsModel;
+
+import java.util.List;
 
 public class SessionsListAdapter extends RecyclerView.Adapter<SessionsListAdapter.SessionViewHolder> {
 
@@ -35,7 +38,7 @@ public class SessionsListAdapter extends RecyclerView.Adapter<SessionsListAdapte
 
     @Override
     public int getItemCount() {
-        return 0;
+        return sessionsList.size();
     }
 
     public class SessionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
