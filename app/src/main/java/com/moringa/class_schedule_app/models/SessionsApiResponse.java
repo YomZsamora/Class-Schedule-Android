@@ -7,26 +7,27 @@ import com.google.gson.annotations.SerializedName;
 import org.parceler.Parcel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Parcel
 public class SessionsApiResponse {
 
     @SerializedName("sessions")
     @Expose
-    private ArrayList<SessionsModel> sessions = null;
+    private List<SessionsModel> sessions = null;
 
     public SessionsApiResponse() {
     }
 
-    public SessionsApiResponse(ArrayList<SessionsModel> sessions) {
+    public SessionsApiResponse(List<SessionsModel> sessions) {
         this.sessions = sessions;
     }
 
-    public ArrayList<SessionsModel> getSessions() {
+    public List<SessionsModel> getSessions() {
         return sessions;
     }
 
-    public void setSessions(ArrayList<SessionsModel> sessions) {
+    public void setSessions(List<SessionsModel> sessions) {
         this.sessions = sessions;
     }
 }
