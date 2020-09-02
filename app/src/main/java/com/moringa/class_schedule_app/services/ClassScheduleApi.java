@@ -1,5 +1,9 @@
 package com.moringa.class_schedule_app.services;
 
+import com.moringa.class_schedule_app.models.CohortModel;
+import com.moringa.class_schedule_app.models.CohortsApiResponse;
+import com.moringa.class_schedule_app.models.ModuleModel;
+import com.moringa.class_schedule_app.models.ModulesApiResponse;
 import com.moringa.class_schedule_app.models.SessionsApiResponse;
 import com.moringa.class_schedule_app.models.SessionsModel;
 import com.moringa.class_schedule_app.models.StudentModel;
@@ -11,6 +15,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ClassScheduleApi {
@@ -42,6 +47,24 @@ public interface ClassScheduleApi {
     );
     @GET("mentors")
     Call<TechnicalMentorApiResponse> getTechnicalMentorsList();
+
+    //MODULES
+    @GET("modules")
+    Call<ModulesApiResponse> getModulesList();
+    //get individual module by id
+    @GET("module/{id}")
+    Call<ModuleModel> getModuleById(
+            @Path("id") int moduleId
+    );
+
+    //COHORTS
+    @GET("cohorts")
+    Call<CohortsApiResponse> getCohortsList();
+    //get individual cohort by id
+    @GET("cohort/{id}")
+    Call<CohortModel> getCohortById(
+            @Path("id") int cohortId
+    );
 }
 
 
