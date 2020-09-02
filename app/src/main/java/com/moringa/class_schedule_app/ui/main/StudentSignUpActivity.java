@@ -53,8 +53,9 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
     @Override
     public void onClick(View view) {
         if (view == mCreateAccountButton) {
-            Intent intent = new Intent(StudentSignUpActivity.this, MainActivity.class);
-            startActivity(intent);
+            //Uncomment this after creating the main Activity
+//            Intent intent = new Intent(StudentSignUpActivity.this, MainActivity.class);
+//            startActivity(intent);
             finish();
         }
         if (view == mLogTextView) {
