@@ -1,5 +1,7 @@
 package com.moringa.class_schedule_app.services;
 
+import com.moringa.class_schedule_app.models.SessionsApiResponse;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
