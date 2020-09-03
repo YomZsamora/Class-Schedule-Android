@@ -44,9 +44,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         if (view == mLoginButton) {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+           loginWithPassword();
+        }
+    }
+
+    private void loginWithPassword() {
+        String email = mEditTextEmail.getText().toString().trim();
+        String password = mEditTextPassword.getText().toString().trim();
+        if (email.equals("")) {
+            mEditTextEmail.setError("Please enter your email");
+            return;
+        }
+        if (password.equals("")) {
+            mEditTextPassword.setError("Password cannot be blank");
+            return;
         }
     }
 
