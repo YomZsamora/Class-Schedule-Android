@@ -13,7 +13,7 @@
         android:id="@+id/splash_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/more_rounded_corners"
+        android:background="@color/colorSecondaryLight"
         android:backgroundTint="#fff"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="450dp"
@@ -23,7 +23,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/pimg"
+            android:src="@drawable/planner"
             android:scaleType="centerCrop"
             />
     </RelativeLayout>

@@ -1,65 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.moringa.class_schedule_app.ui.main.AccountTypeActivity">
 
-    <TextView
-        android:layout_width="174dp"
-        android:layout_height="673dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="90dp"
-        android:scaleType="centerCrop"
-        android:text="Class Schedule"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:gravity="center_horizontal"
-        android:textStyle="bold"
-        android:textColor="@color/blue"/>
+    <LinearLayout
+        android:background="@drawable/home_bg"
+        android:padding="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="174dp"
-        android:layout_height="673dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp"
-        android:scaleType="centerCrop"
-        android:text="App"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:gravity="center_horizontal"
-        android:textStyle="bold"
-        android:textColor="@color/pink"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/russo_one"
+            android:text="Class Schedule"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"/>
 
-    <ImageView
-        android:id="@+id/plannerImageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/planner"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
-        android:contentDescription="Schedule icon" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:fontFamily="@font/russo_one"
+            android:gravity="center_horizontal"
+            android:text="App"
+            android:textAlignment="center"
+            android:textColor="#64DD17"
+            android:textSize="20sp" />
 
-    <TextView
-        android:layout_width="174dp"
-        android:layout_height="673dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="270dp"
-        android:scaleType="centerCrop"
-        android:text="Get all your class activities in one app"
-        android:textAlignment="center"
-        android:gravity="center_horizontal"
-        android:textColor="@color/colorPrimaryText"/>
+        <ImageView
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:id="@+id/plannerImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/planner"
+            android:contentDescription="Schedule icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/muli_bold"
+            android:text="Choose the type of account you want to create"
+            android:textAlignment="center"
+            android:textColor="@color/colorSecondaryDark" />
+
+    </LinearLayout>
+
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="30dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
         android:id="@+id/linearLayout">
 
 
@@ -69,20 +76,38 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="Sign Up"
-            android:background="@color/colorAccent"
-            android:layout_marginTop="150dp"
+            android:textAllCaps="false"
+            android:background="@drawable/primary_button"
             android:textColor="@color/colorTextIcons" />
 
         <Button
+            android:textAllCaps="false"
             android:id="@+id/LoginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="Login"
-            android:background="@color/colorAccent"
+            android:background="@drawable/primary_button"
             android:layout_marginTop="15dp"
             android:textColor="@color/colorTextIcons" />
 
+        <TextView
+            android:layout_marginTop="20dp"
+            android:id="@+id/logTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/muli"
+            android:gravity="center_horizontal"
+            android:scaleType="centerCrop"
+            android:text="Simple-Convenient-Fast"
+            android:textAlignment="center"
+            android:textColor="@color/colorSecondary"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
     </LinearLayout>
 
-</RelativeLayout>
+
+</LinearLayout>
+

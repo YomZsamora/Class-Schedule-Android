@@ -57,6 +57,5 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:background="@color/textgrey"
         android:backgroundTint="@color/textgrey"
-        app:srcCompat="@drawable/ic_baseline_add_circle_24"
         />
 </RelativeLayout>
