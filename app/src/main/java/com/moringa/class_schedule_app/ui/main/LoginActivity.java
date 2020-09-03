@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.moringa.class_schedule_app.R;
 import com.moringa.class_schedule_app.ui.MainActivity;
 
@@ -20,6 +21,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @BindView(R.id.editTextEmail) TextView mEditTextEmail;
     @BindView(R.id.editTextPassword) TextView mEditTextPassword;
 
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         ButterKnife.bind(this);
         mRegisterTextView.setOnClickListener(this);
         mLoginButton.setOnClickListener(this);
+
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
