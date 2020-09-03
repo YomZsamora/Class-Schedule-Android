@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context="com.moringa.class_schedule_app.StudentSignUpActivity">
+    tools:context="com.moringa.class_schedule_app.ui.main.StudentSignUpActivity">
 
     <TextView
         android:id="@+id/loginTextView"
@@ -29,7 +29,7 @@
             android:id="@+id/editTextName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edittext_shape"
+            android:background="@drawable/circular_corners"
             android:hint="Enter name"
             android:nextFocusDown="@+id/passwordEditText"
             android:padding="10dip"
@@ -42,7 +42,7 @@
             android:id="@+id/editTextEmail"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edittext_shape"
+            android:background="@drawable/circular_corners"
             android:hint="Email Address"
             android:inputType="textEmailAddress"
             android:nextFocusDown="@+id/cohort_spinner"
@@ -57,7 +57,7 @@
             android:layout_width="fill_parent"
             android:layout_height="47dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/edittext_shape"
+            android:background="@drawable/circular_corners"
             android:hint="@string/cohort"
             android:inputType="textEmailAddress"
             android:nextFocusDown="@+id/passwordEditText"
@@ -70,7 +70,7 @@
             android:id="@+id/editTextPassword"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edittext_shape"
+            android:background="@drawable/circular_corners"
             android:hint="Enter Password"
             android:inputType="textPassword"
             android:nextFocusDown="@+id/passwordEditText"
@@ -84,7 +84,7 @@
             android:id="@+id/editTextConfirmPassword"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edittext_shape"
+            android:background="@drawable/circular_corners"
             android:hint="Confirm Password"
             android:inputType="textPassword"
             android:nextFocusDown="@+id/passwordEditText"

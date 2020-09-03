@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,10 +20,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class StudentSignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, StudentSignUpActivityInterface {
-    @BindView(R.id.createAccountButton)
-    Button mCreateAccountButton;
-    @BindView(R.id.logTextView)
-    TextView mLogTextView;
+    @BindView(R.id.createAccountButton) Button mCreateAccountButton;
+    @BindView(R.id.logTextView) TextView mLogTextView;
+    @BindView(R.id.editTextName) EditText mEditTextName;
+    @BindView(R.id.editTextName) EditText mEditTextEmail;
+    @BindView(R.id.cohort_spinner) Spinner mCohortSpinner;
+    @BindView(R.id.editTextPassword) EditText editTextPassword;
+    @BindView(R.id.editTextConfirmPassword) EditText editTextConfirmPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,16 +57,19 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
 
     @Override
     public void onClick(View view) {
-        if (view == mCreateAccountButton) {
-            Intent intent = new Intent(StudentSignUpActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
         if (view == mLogTextView) {
             Intent intent = new Intent(StudentSignUpActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
         }
+        if (view == mCreateAccountButton) {
+            createNewUser();
+        }
+
+    }
+
+    private void createNewUser() {
 
     }
 }
