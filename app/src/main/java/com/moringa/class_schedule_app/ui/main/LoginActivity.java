@@ -3,6 +3,7 @@ package com.moringa.class_schedule_app.ui.main;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,7 @@ import butterknife.ButterKnife;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String TAG = StudentSignUpActivity.class.getSimpleName();
+    private ProgressDialog mAuthProgressDialog;
 
     @BindView(R.id.registerTextView) TextView mRegisterTextView;
     @BindView(R.id.LoginButton) Button mLoginButton;
@@ -57,6 +59,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         };
+
+        createAuthProgressDialog();
+    }
+
+    private void createAuthProgressDialog() {
+        mAuthProgressDialog = new ProgressDialog(this);
+        mAuthProgressDialog.setTitle("Loading...");
+        mAuthProgressDialog.setMessage("Logging in...");
+        mAuthProgressDialog.setCancelable(false);
     }
 
     @Override
