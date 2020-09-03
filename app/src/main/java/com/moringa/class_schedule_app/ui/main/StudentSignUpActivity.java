@@ -1,9 +1,11 @@
 package com.moringa.class_schedule_app.ui.main;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,6 +15,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.moringa.class_schedule_app.R;
 import com.moringa.class_schedule_app.ui.MainActivity;
 
@@ -20,18 +26,24 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class StudentSignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, StudentSignUpActivityInterface {
+    public static final String TAG = StudentSignUpActivity.class.getSimpleName();
+
     @BindView(R.id.createAccountButton) Button mCreateAccountButton;
     @BindView(R.id.logTextView) TextView mLogTextView;
     @BindView(R.id.editTextName) EditText mEditTextName;
     @BindView(R.id.editTextName) EditText mEditTextEmail;
     @BindView(R.id.cohort_spinner) Spinner mCohortSpinner;
-    @BindView(R.id.editTextPassword) EditText editTextPassword;
-    @BindView(R.id.editTextConfirmPassword) EditText editTextConfirmPassword;
+    @BindView(R.id.editTextPassword) EditText mEditTextPassword;
+    @BindView(R.id.editTextConfirmPassword) EditText mEditTextConfirmPassword;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_sign_up);
+
+        mAuth = FirebaseAuth.getInstance();
 
         Spinner spinner = findViewById(R.id.cohort_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cohorts, android.R.layout.simple_spinner_item);
@@ -70,6 +82,22 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
     }
 
     private void createNewUser() {
+        final String name = mEditTextName.getText().toString().trim();
+        final String email = mEditTextEmail.getText().toString().trim();
+        String password = mEditTextPassword.getText().toString().trim();
+        String confirmPassword = mEditTextConfirmPassword.getText().toString().trim();
 
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "Authentication successful");
+                        } else {
+                            Toast.makeText(StudentSignUpActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }
