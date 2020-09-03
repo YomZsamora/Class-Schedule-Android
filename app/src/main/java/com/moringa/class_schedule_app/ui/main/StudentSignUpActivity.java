@@ -90,6 +90,11 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
         String password = mEditTextPassword.getText().toString().trim();
         String confirmPassword = mEditTextConfirmPassword.getText().toString().trim();
 
+        boolean validEmail = isValidEmail(email);
+        boolean validName = isValidName(name);
+        boolean validPassword = isValidPassword(password, confirmPassword);
+        if (!validEmail || !validName || !validPassword) return;
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
