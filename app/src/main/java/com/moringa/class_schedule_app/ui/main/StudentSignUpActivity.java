@@ -30,6 +30,7 @@ import butterknife.ButterKnife;
 public class StudentSignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, StudentSignUpActivityInterface {
     public static final String TAG = StudentSignUpActivity.class.getSimpleName();
     private ProgressDialog mAuthProgressDialog;
+    private String mName;
 
     @BindView(R.id.createAccountButton) Button mCreateAccountButton;
     @BindView(R.id.logTextView) TextView mLogTextView;
@@ -96,13 +97,13 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
     }
 
     private void createNewUser() {
-        final String name = mEditTextName.getText().toString().trim();
+        final String mName = mEditTextName.getText().toString().trim();
         final String email = mEditTextEmail.getText().toString().trim();
         String password = mEditTextPassword.getText().toString().trim();
         String confirmPassword = mEditTextConfirmPassword.getText().toString().trim();
 
         boolean validEmail = isValidEmail(email);
-        boolean validName = isValidName(name);
+        boolean validName = isValidName(mName);
         boolean validPassword = isValidPassword(password, confirmPassword);
         if (!validEmail || !validName || !validPassword) return;
 
