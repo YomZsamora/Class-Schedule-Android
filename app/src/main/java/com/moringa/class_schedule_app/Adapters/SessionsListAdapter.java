@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.moringa.class_schedule_app.R;
@@ -68,6 +69,8 @@ public class SessionsListAdapter extends RecyclerView.Adapter<SessionsListAdapte
         TextView mSessionStartTime;
         @BindView(R.id.sessionEndTime)
         TextView mSessionEndTime;
+        @BindView(R.id.sessionCardItem)
+        CardView mSessionCard;
 
         private String TAG = SessionViewHolder.class.getSimpleName();
         private Context context;
@@ -77,15 +80,19 @@ public class SessionsListAdapter extends RecyclerView.Adapter<SessionsListAdapte
             super(itemView);
             ButterKnife.bind(this, itemView);
             context = itemView.getContext();
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            int itemPosition = getLayoutPosition();
-            Intent intent = new Intent(context, SessionDetailsActivity.class);
-            intent.putExtra("position", itemPosition);
-            intent.putExtra("sessions", Parcels.wrap(sessionsList));
-            context.startActivity(intent);
+            if (view == mSessionCard) {
+                int itemPosition = getLayoutPosition();
+                Intent intent = new Intent(context, SessionDetailsActivity.class);
+                intent.putExtra("position", itemPosition);
+                intent.putExtra("sessions", Parcels.wrap(sessionsList));
+                Log.d(TAG, "card view clicked");
+                context.startActivity(intent);
+            }
         }
 
         //get the data and bind it the views
