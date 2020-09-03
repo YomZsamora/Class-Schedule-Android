@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3A86FF</color>
-    <color name="colorPrimaryDark">#222E4E</color>
-    <color name="colorSecondaryLight">#ECECF8</color>
-    <color name="colorSecondary">#BAC4E0</color>
-    <color name="colorSecondaryDark">#8F95A7</color>
-    <color name="errorLightRed">#9d0208</color>
-    <color name="errorDarkRed">#6a040f</color>
+    <color name="colorPrimary">#FF5722</color>
+    <color name="colorPrimaryDark">#E64A19</color>
+    <color name="colorPrimaryLight">#FFCCBC</color>
+    <color name="colorTextIcons">#FFFFFF</color>
+    <color name="colorAccent">#009688</color>
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#727272</color>
+    <color name="colorDivider">#B6B6B6</color>
 
 <!--custom colors-->
     <color name="red">#F44336</color>
@@ -21,4 +22,5 @@
     <color name="textgrey">#303030</color>
     <color name="textgreylight">#464646</color>
     <color name="black">#000000</color>
+    <color name="pink">#FF69B4</color>
 </resources>

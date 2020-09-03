@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.moringa.class_schedule_app.R;
-
+//addonCreateOptionsMenu
 public class MainActivity extends AppCompatActivity {
     private int splashTime=3000;
     Animation top_anim,bottom_anim;
@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i=new Intent(MainActivity.this,SignUp.class);
-                startActivity(i);
+//                Intent i=new Intent(MainActivity.this,SignUp.class);
+//                startActivity(i);
                 finish();
             }
         },splashTime);
