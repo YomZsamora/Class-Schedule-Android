@@ -6,6 +6,6 @@
     app:showAsAction="always"
     android:iconTint="@color/textgrey"
     app:actionViewClass="androidx.appcompat.widget.SearchView"
-    android:icon="@drawable/ic_baseline_search_24"/>
+    android:icon="@drawable/baseline_search_24"/>
     
 </menu>

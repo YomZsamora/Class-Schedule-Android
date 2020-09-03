@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@color/colorSecondaryLight"
     tools:context="com.moringa.class_schedule_app.ui.main.TmSignUpActivity">
 
     <TextView
@@ -10,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create Technical Mentor Account"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorSecondaryDark"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_above="@+id/linearLayout"
@@ -86,7 +87,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="Create Account"
-            android:background="@color/colorAccent"
+            android:background="@drawable/primary_button"
             android:layout_marginTop="15dp"
             android:textColor="@color/colorTextIcons" />
         <TextView

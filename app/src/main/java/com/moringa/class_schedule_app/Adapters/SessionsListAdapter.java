@@ -1,6 +1,7 @@
 package com.moringa.class_schedule_app.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.moringa.class_schedule_app.R;
@@ -15,7 +17,9 @@ import com.moringa.class_schedule_app.models.ModuleModel;
 import com.moringa.class_schedule_app.models.SessionsModel;
 import com.moringa.class_schedule_app.services.ClassScheduleApi;
 import com.moringa.class_schedule_app.services.ClassScheduleClient;
+import com.moringa.class_schedule_app.ui.SessionDetailsActivity;
 
+import org.parceler.Parcels;
 import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
@@ -65,6 +69,8 @@ public class SessionsListAdapter extends RecyclerView.Adapter<SessionsListAdapte
         TextView mSessionStartTime;
         @BindView(R.id.sessionEndTime)
         TextView mSessionEndTime;
+        @BindView(R.id.sessionCardItem)
+        CardView mSessionCard;
 
         private String TAG = SessionViewHolder.class.getSimpleName();
         private Context context;
@@ -74,11 +80,19 @@ public class SessionsListAdapter extends RecyclerView.Adapter<SessionsListAdapte
             super(itemView);
             ButterKnife.bind(this, itemView);
             context = itemView.getContext();
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-
+            if (view == mSessionCard) {
+                int itemPosition = getLayoutPosition();
+                Intent intent = new Intent(context, SessionDetailsActivity.class);
+                intent.putExtra("position", itemPosition);
+                intent.putExtra("sessions", Parcels.wrap(sessionsList));
+                Log.d(TAG, "card view clicked");
+                context.startActivity(intent);
+            }
         }
 
         //get the data and bind it the views
