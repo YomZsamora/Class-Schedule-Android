@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.moringa.class_schedule_app.ui.main.SessionsActivity">
+
+    <TextView
+        android:id="@+id/loginTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout"
+        android:layout_marginStart="30dp"
+        android:text="Add a new session"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/plannerImageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="50dp"
+        android:contentDescription="Schedule icon"
+        android:scaleType="centerCrop"
+        android:src="@drawable/planner" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="30dip"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout">
+
+        <EditText
+            android:id="@+id/editTextSessionName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circular_corners"
+            android:hint="Session name"
+            android:nextFocusDown="@+id/submitButton"
+            android:padding="10dip"
+            android:layout_marginBottom="10dip"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/colorDivider"
+            android:textSize="15sp"/>
+
+        <EditText
+            android:id="@+id/editTextStartTime"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circular_corners"
+            android:hint="Start Time"
+            android:inputType="datetime"
+            android:nextFocusDown="@+id/submitButton"
+            android:padding="10dip"
+            android:layout_marginBottom="10dp"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/colorDivider"
+            android:textSize="15sp"/>
+
+        <EditText
+            android:id="@+id/editTextEndTime"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circular_corners"
+            android:hint="End Time"
+            android:inputType="datetime"
+            android:nextFocusDown="@+id/submitButton"
+            android:padding="10dip"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="-56dp"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/colorDivider"
+            android:textSize="15sp"
+            android:layout_marginStart="150dp"/>
+
+        <EditText
+            android:id="@+id/editTextDate"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circular_corners"
+            android:hint="Date"
+            android:inputType="date"
+            android:padding="10dip"
+            android:layout_marginBottom="10dp"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/colorDivider"
+            android:textSize="15sp"/>
+
+        <Spinner
+            android:id="@+id/cohort_spinner"
+            android:layout_width="100dp"
+            android:layout_height="47dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/circular_corners"
+            android:hint="@string/cohort"
+            android:inputType="textEmailAddress"
+            android:nextFocusDown="@+id/submitButton"
+            android:padding="10dip"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/colorDivider"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/editTextModule"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circular_corners"
+            android:hint="Module"
+            android:inputType="datetime"
+            android:nextFocusDown="@+id/submitButton"
+            android:padding="10dip"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="-56dp"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/colorDivider"
+            android:textSize="15sp"
+            android:layout_marginStart="150dp"/>
+
+        <EditText
+            android:id="@+id/editTextDescription"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:hint="Brief session description"
+            android:inputType="text"
+            android:nextFocusDown="@+id/submitButton"
+            android:padding="10dip"
+            android:layout_marginBottom="10dp"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/colorDivider"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Submit"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/colorTextIcons" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -10,7 +10,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.main.HomeActivity"></activity>
+        <activity android:name=".ui.main.SessionsActivity"></activity>
+        <activity android:name=".ui.main.HomeActivity" />
         <activity android:name=".ui.main.AccountTypeActivity" />
         <activity android:name=".ui.main.TmSignUpActivity" />
         <activity android:name=".ui.SessionDetailsActivity" />
