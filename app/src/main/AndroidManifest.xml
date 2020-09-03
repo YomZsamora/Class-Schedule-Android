@@ -14,8 +14,7 @@
         <activity android:name=".ui.main.AccountTypeActivity" />
         <activity android:name=".ui.main.TmSignUpActivity" />
         <activity
-            android:name=".ui.MainActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:name=".ui.MainActivity" />
         <activity
             android:name=".ui.main.StudentSignUpActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
