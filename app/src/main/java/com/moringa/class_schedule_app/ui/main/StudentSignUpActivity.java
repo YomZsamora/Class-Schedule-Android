@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.moringa.class_schedule_app.R;
 import com.moringa.class_schedule_app.ui.MainActivity;
 
@@ -37,6 +38,7 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
     @BindView(R.id.editTextConfirmPassword) EditText mEditTextConfirmPassword;
 
     private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
         setContentView(R.layout.activity_student_sign_up);
 
         mAuth = FirebaseAuth.getInstance();
+        createAuthStateListener();
 
         Spinner spinner = findViewById(R.id.cohort_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cohorts, android.R.layout.simple_spinner_item);
@@ -99,5 +102,21 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
                         }
                     }
                 });
+    }
+
+    private void createAuthStateListener() {
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                final FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    Intent intent = new Intent(StudentSignUpActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        };
     }
 }
