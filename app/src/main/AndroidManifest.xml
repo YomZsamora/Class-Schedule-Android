@@ -22,17 +22,17 @@
         <activity
             android:name=".ui.main.LoginActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".ui.Post" />
         <activity android:name=".ui.Search" />
         <activity
             android:name=".ui.Main"
             android:label="Class Schedule App" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
