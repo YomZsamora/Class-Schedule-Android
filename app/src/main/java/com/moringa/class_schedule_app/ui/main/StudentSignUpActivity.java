@@ -32,7 +32,7 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
     @BindView(R.id.createAccountButton) Button mCreateAccountButton;
     @BindView(R.id.logTextView) TextView mLogTextView;
     @BindView(R.id.editTextName) EditText mEditTextName;
-    @BindView(R.id.editTextName) EditText mEditTextEmail;
+    @BindView(R.id.editTextEmail) EditText mEditTextEmail;
     @BindView(R.id.cohort_spinner) Spinner mCohortSpinner;
     @BindView(R.id.editTextPassword) EditText mEditTextPassword;
     @BindView(R.id.editTextConfirmPassword) EditText mEditTextConfirmPassword;
@@ -132,5 +132,34 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
+    }
+
+    private boolean isValidEmail(String email) {
+        boolean isGoodEmail =
+                (email != null && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches());
+        if (!isGoodEmail) {
+            mEditTextEmail.setError("Please enter a valid email address");
+            return false;
+        }
+        return isGoodEmail;
+    }
+
+    private boolean isValidName(String name) {
+        if (name.equals("")) {
+            mEditTextName.setError("Please enter your name");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isValidPassword(String password, String confirmPassword) {
+        if (password.length() < 6) {
+            mEditTextPassword.setError("Please create a password containing at least 6 characters");
+            return false;
+        } else if (!password.equals(confirmPassword)) {
+            mEditTextPassword.setError("Passwords do not match");
+            return false;
+        }
+        return true;
     }
 }
