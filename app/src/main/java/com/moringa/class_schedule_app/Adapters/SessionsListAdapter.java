@@ -1,6 +1,7 @@
 package com.moringa.class_schedule_app.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,9 @@ import com.moringa.class_schedule_app.models.ModuleModel;
 import com.moringa.class_schedule_app.models.SessionsModel;
 import com.moringa.class_schedule_app.services.ClassScheduleApi;
 import com.moringa.class_schedule_app.services.ClassScheduleClient;
+import com.moringa.class_schedule_app.ui.SessionDetailsActivity;
 
+import org.parceler.Parcels;
 import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
@@ -78,7 +81,11 @@ public class SessionsListAdapter extends RecyclerView.Adapter<SessionsListAdapte
 
         @Override
         public void onClick(View view) {
-
+            int itemPosition = getLayoutPosition();
+            Intent intent = new Intent(context, SessionDetailsActivity.class);
+            intent.putExtra("position", itemPosition);
+            intent.putExtra("sessions", Parcels.wrap(sessionsList));
+            context.startActivity(intent);
         }
 
         //get the data and bind it the views
