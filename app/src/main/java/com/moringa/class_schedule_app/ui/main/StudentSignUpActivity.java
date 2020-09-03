@@ -51,8 +51,19 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
         createAuthProgressDialog();
 
         mAuth = FirebaseAuth.getInstance();
-        createAuthStateListener();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    getSupportActionBar().setTitle("Welcome, " + user.getDisplayName() + "!");
+                } else {
 
+                }
+            }
+        };
+
+        createAuthStateListener();
 
         Spinner spinner = findViewById(R.id.cohort_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cohorts, android.R.layout.simple_spinner_item);
