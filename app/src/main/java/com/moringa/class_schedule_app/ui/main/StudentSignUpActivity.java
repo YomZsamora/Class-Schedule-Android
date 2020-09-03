@@ -3,6 +3,7 @@ package com.moringa.class_schedule_app.ui.main;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +29,7 @@ import butterknife.ButterKnife;
 
 public class StudentSignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, StudentSignUpActivityInterface {
     public static final String TAG = StudentSignUpActivity.class.getSimpleName();
+    private ProgressDialog mAuthProgressDialog;
 
     @BindView(R.id.createAccountButton) Button mCreateAccountButton;
     @BindView(R.id.logTextView) TextView mLogTextView;
@@ -44,9 +46,11 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_sign_up);
+        createAuthProgressDialog();
 
         mAuth = FirebaseAuth.getInstance();
         createAuthStateListener();
+
 
         Spinner spinner = findViewById(R.id.cohort_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cohorts, android.R.layout.simple_spinner_item);
@@ -57,6 +61,13 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
         ButterKnife.bind(this);
         mCreateAccountButton.setOnClickListener((View.OnClickListener) this);
         mLogTextView.setOnClickListener((View.OnClickListener) this);
+    }
+
+    private void createAuthProgressDialog() {
+        mAuthProgressDialog = new ProgressDialog(this);
+        mAuthProgressDialog.setTitle("Loading...");
+        mAuthProgressDialog.setMessage("Authenticating with Firebase...");
+        mAuthProgressDialog.setCancelable(false);
     }
 
     @Override
@@ -95,10 +106,14 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
         boolean validPassword = isValidPassword(password, confirmPassword);
         if (!validEmail || !validName || !validPassword) return;
 
+        mAuthProgressDialog.show();
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        mAuthProgressDialog.dismiss();
+
                         if (task.isSuccessful()) {
                             Log.d(TAG, "Authentication successful");
                         } else {
