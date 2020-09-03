@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.moringa.class_schedule_app.R;
+import com.moringa.class_schedule_app.ui.Main;
 import com.moringa.class_schedule_app.ui.MainActivity;
 
 import butterknife.BindView;
@@ -145,7 +146,7 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 final FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    Intent intent = new Intent(StudentSignUpActivity.this, MainActivity.class);
+                    Intent intent = new Intent(StudentSignUpActivity.this, Main.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();

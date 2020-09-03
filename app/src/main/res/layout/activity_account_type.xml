@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:background="@drawable/home_bg"
-        android:padding="100dp"
+        android:padding="70dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
