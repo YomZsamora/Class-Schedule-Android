@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.moringa.class_schedule_app.R;
+import com.moringa.class_schedule_app.ui.Main;
 import com.moringa.class_schedule_app.ui.MainActivity;
 
 import butterknife.BindView;
@@ -131,7 +132,7 @@ public class TmSignUpActivity extends AppCompatActivity implements View.OnClickL
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 final FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    Intent intent = new Intent(TmSignUpActivity.this, MainActivity.class);
+                    Intent intent = new Intent(TmSignUpActivity.this, Main.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
@@ -152,7 +153,7 @@ public class TmSignUpActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Log.d(TAG, user.getDisplayName());
+//                            Log.d(TAG, user.getDisplayName());
                         }
                     }
 

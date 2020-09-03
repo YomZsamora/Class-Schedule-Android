@@ -19,7 +19,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.moringa.class_schedule_app.R;
+import com.moringa.class_schedule_app.ui.main.HomeActivity;
 import com.moringa.class_schedule_app.ui.main.SectionsPagerAdapter;
 import com.moringa.class_schedule_app.ui.main.StudentSignUpActivity;
 
@@ -77,7 +79,12 @@ public class Main extends AppCompatActivity {
                 break;
             case R.id.logout_menu:
                 Toast.makeText(this, "logging out", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Main.this, StudentSignUpActivity.class);
+                FirebaseAuth.getInstance().signOut();
+
+                Intent intent = new Intent(Main.this, HomeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
                 startActivity(intent);
                 break;
         }

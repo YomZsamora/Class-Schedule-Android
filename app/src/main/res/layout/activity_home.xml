@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:background="@drawable/home_bg"
-        android:padding="100dp"
+        android:padding="60dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -53,7 +53,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/muli_bold"
-            android:text="Choose the type of account you want to create"
+            android:text="Get your class activities all in one app"
             android:textAlignment="center"
             android:textColor="@color/colorSecondaryDark" />
 
