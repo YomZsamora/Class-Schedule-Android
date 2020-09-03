@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.moringa.class_schedule_app.R;
+import com.moringa.class_schedule_app.ui.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,9 +54,8 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
     @Override
     public void onClick(View view) {
         if (view == mCreateAccountButton) {
-            //Uncomment this after creating the main Activity
-//            Intent intent = new Intent(StudentSignUpActivity.this, MainActivity.class);
-//            startActivity(intent);
+            Intent intent = new Intent(StudentSignUpActivity.this, MainActivity.class);
+            startActivity(intent);
             finish();
         }
         if (view == mLogTextView) {

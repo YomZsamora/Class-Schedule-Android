@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.moringa.class_schedule_app.R;
+import com.moringa.class_schedule_app.ui.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,9 +33,8 @@ public class TmSignUpActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         if (view == mCreateAccountButton) {
-            //will uncomment this when main activity is done
-//            Intent intent = new Intent(TmSignUpActivity.this, MainActivity.class);
-//            startActivity(intent);
+            Intent intent = new Intent(TmSignUpActivity.this, MainActivity.class);
+            startActivity(intent);
             finish();
         }
         if (view == mLogTextView) {
