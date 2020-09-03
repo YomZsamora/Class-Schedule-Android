@@ -10,7 +10,7 @@ public class ClassScheduleClient {
 
     private static Retrofit retrofit = null;
 
-    public static ClassScheduleApi getClassSchedule() {
+    public static ClassScheduleApi getClient() {
 
         if (retrofit == null) {
             OkHttpClient okHttpClient = new OkHttpClient.Builder().build();

@@ -2,81 +2,123 @@ package com.moringa.class_schedule_app.fragments;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.moringa.class_schedule_app.Interfaces.SessionsInterface;
-import com.moringa.class_schedule_app.R;
-import com.moringa.class_schedule_app.fireModel.ListAdapter;
-import com.moringa.class_schedule_app.models.SessionsApiModel;
-import com.moringa.class_schedule_app.fireModel.SetData;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
+import com.moringa.class_schedule_app.R;
+import com.moringa.class_schedule_app.adapters.SessionsListAdapter;
+import com.moringa.class_schedule_app.models.SessionsApiResponse;
+import com.moringa.class_schedule_app.models.SessionsModel;
+import com.moringa.class_schedule_app.services.ClassScheduleApi;
+import com.moringa.class_schedule_app.services.ClassScheduleClient;
+
+import java.util.List;
 
 
 public class FragmentHome extends Fragment {
-    @Nullable
+
+    @BindView(R.id.homeProgressBar)
+    ProgressBar mHomeProgressBar;
+    @BindView(R.id.sessionsListRecyclerView)
+    RecyclerView mSessionsRecyclerView;
+    @BindView(R.id.homeErrorText)
+    TextView mErrorText;
+
+    private List<SessionsModel> mSessionsList;
+    private SessionsListAdapter mAdapter;
+    private final static String TAG = FragmentHome.class.getSimpleName();
+
+    public FragmentHome() {
+    }
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root=inflater.inflate(R.layout.fragment_home,container,false);
-        final ListView mlist=root.findViewById(R.id.mylist);
-        final List<SetData> setData=new ArrayList<>();
-        ListAdapter listAdapter;
-        String baseurl="https://class-schedule-api-moringa.herokuapp.com/";
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
-//        retrofit builer
-        Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl(baseurl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        SessionsInterface sessionsInterface=retrofit.create(SessionsInterface.class);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        ButterKnife.bind(this, view);
+        getSessionsList();
+        return view;
+    }
 
-//        getting a response from our api
-        Call<List<SessionsApiModel>> call= sessionsInterface.getSessions();
-        call.enqueue(new Callback<List<SessionsApiModel>>() {
+    //gather sessions list from api
+    private void getSessionsList() {
+        ClassScheduleApi client = ClassScheduleClient.getClient();
+        Call<List<SessionsModel>> call = client.getSessionList();
+        call.enqueue(new Callback<List<SessionsModel>>() {
             @Override
-            public void onResponse(Call<List<SessionsApiModel>> call, Response<List<SessionsApiModel>> response) {
-                if (!response.isSuccessful()){
-                    Toast.makeText(getActivity(), "failed"+response.code(), Toast.LENGTH_SHORT).show();
-                    return;
+            public void onResponse(Call<List<SessionsModel>> call, Response<List<SessionsModel>> response) {
+                hideProgressBar();
+                if(response.isSuccessful()){
+                    mSessionsList = response.body();
+
+                    mAdapter = new SessionsListAdapter(mSessionsList, getContext());
+                    mSessionsRecyclerView.setAdapter(mAdapter);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+                    mSessionsRecyclerView.setLayoutManager(layoutManager);
+                    mSessionsRecyclerView.setHasFixedSize(true);
+
+                    Log.d(TAG, String.valueOf(mSessionsList));
+                    //toggle the recyclerview visibility
+                    showSessionsList();
+                } else {
+                    hideProgressBar();
+                    showUnsuccessfulMessage();
                 }
-                List<SessionsApiModel> posts = response.body();
-                List<SetData> addData=new ArrayList<>();
-//                loops through each response table adding data to an array being displayed in the listview
-                    for (SessionsApiModel posy : posts){
-
-                        String title=posy.getSession_name();
-                        String desc=posy.getDescription();
-                        String tm=posy.getStart_time();
-                        addData.add(new SetData(title,tm,desc));
-
-                    }ListAdapter list=new ListAdapter(getContext(),R.layout.list_item,addData);
-                mlist.setAdapter(list);
-
             }
 
             @Override
-            public void onFailure(Call<List<SessionsApiModel>> call, Throwable t) {
-
+            public void onFailure(Call<List<SessionsModel>> call, Throwable t) {
+                hideProgressBar();
+                showFailureMessage();
+                Log.d(TAG, "on failure", t);
             }
         });
+    }
 
-        listAdapter=new ListAdapter(getContext(),R.layout.list_item,setData);
+    private void showFailureMessage() {
+        mErrorText.setText("Something went wrong. Please check your Internet connection and try again later");
+        mErrorText.setVisibility(View.VISIBLE);
+    }
 
-        return root;
+    private void showUnsuccessfulMessage() {
+        mErrorText.setText("Oops, something unexpected happened!");
+        mErrorText.setVisibility(View.VISIBLE);
+    }
+
+    //these methods change the views' visibility
+    private void showSessionsList() {
+        mSessionsRecyclerView.setVisibility(View.VISIBLE);
+    }
+    private void hideSessionsList() {
+        mSessionsRecyclerView.setVisibility(View.GONE);
+    }
+
+    private void hideProgressBar() {
+        mHomeProgressBar.setVisibility(View.GONE);
+    }
+
+    private void showProgressBar() {
+        mHomeProgressBar.setVisibility(View.VISIBLE);
     }
 }

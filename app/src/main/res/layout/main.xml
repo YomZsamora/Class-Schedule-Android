@@ -15,16 +15,16 @@
         android:elevation="10dp"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/mytoolbar"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            app:title="Classroom"
-            app:logo="@drawable/ic_local_library_black_24dp"
-            app:titleMarginStart="30dp"
-            app:titleTextColor="@color/textgrey"
-            app:elevation="0dp"
-            android:background="@color/white"/>
+<!--        <androidx.appcompat.widget.Toolbar-->
+<!--            android:id="@+id/mytoolbar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            app:title="Classroom"-->
+<!--            app:logo="@drawable/ic_local_library_black_24dp"-->
+<!--            app:titleMarginStart="30dp"-->
+<!--            app:titleTextColor="@color/textgrey"-->
+<!--            app:elevation="0dp"-->
+<!--            android:background="@color/white"/>-->
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
@@ -35,7 +35,6 @@
             app:tabSelectedTextColor="@color/light_blue"
             app:tabTextColor="@color/textgreylight"
             app:tabIndicatorHeight="3dp"
-            android:layout_below="@id/mytoolbar"
             android:background="@color/white" />
     </LinearLayout>
 

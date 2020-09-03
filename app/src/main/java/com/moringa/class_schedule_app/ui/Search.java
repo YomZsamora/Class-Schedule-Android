@@ -18,8 +18,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.moringa.class_schedule_app.Adapters.MyviewAdapter;
 import com.moringa.class_schedule_app.R;
+import com.moringa.class_schedule_app.adapters.MyviewAdapter;
 import com.moringa.class_schedule_app.fireModel.Fmodel;
 
 import java.util.ArrayList;
