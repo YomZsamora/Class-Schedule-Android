@@ -48,7 +48,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="270dp"
         android:scaleType="centerCrop"
-        android:text="Get all your class activities in one app"
+        android:text="Choose the type of account you want to create"
         android:textAlignment="center"
         android:gravity="center_horizontal"
         android:textColor="@color/colorPrimaryText"/>
@@ -64,25 +64,40 @@
 
 
         <Button
-            android:id="@+id/SignUpButton"
+            android:id="@+id/studentButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Sign Up"
+            android:text="Student"
             android:background="@color/colorAccent"
             android:layout_marginTop="150dp"
             android:textColor="@color/colorTextIcons" />
 
         <Button
-            android:id="@+id/LoginButton"
+            android:id="@+id/mentorButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Login"
+            android:text="Technical Mentor"
             android:background="@color/colorAccent"
             android:layout_marginTop="15dp"
             android:textColor="@color/colorTextIcons" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/logTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="470dp"
+        android:layout_marginLeft="70dp"
+        android:scaleType="centerCrop"
+        android:textColor="@color/colorPrimaryText"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:text="Already have an account? Login"
+        android:textAlignment="center"
+        android:gravity="center_horizontal"/>
+
 
 </RelativeLayout>
