@@ -32,7 +32,6 @@
         <activity
             android:name=".ui.Main"
             android:label="@string/title_activity_main" />
-        <activity android:name=".ui.Home" />
     </application>
 
 </manifest>
