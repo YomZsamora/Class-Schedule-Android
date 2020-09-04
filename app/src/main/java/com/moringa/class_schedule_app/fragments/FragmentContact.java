@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.moringa.class_schedule_app.R;
 import com.moringa.class_schedule_app.adapters.StudentContactListAdapter;
@@ -19,7 +21,6 @@ import com.moringa.class_schedule_app.models.StudentModel;
 import com.moringa.class_schedule_app.services.ClassScheduleApi;
 import com.moringa.class_schedule_app.services.ClassScheduleClient;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -31,7 +32,7 @@ import retrofit2.Response;
 public class FragmentContact extends Fragment {
 
     @BindView(R.id.studentsContactList)
-    ListView mStudentListView;
+    RecyclerView mStudentRecyclerView;
     @BindView(R.id.tmContactsList)
     ListView mTMListView;
     @BindView(R.id.contactProgressBar)
@@ -43,7 +44,7 @@ public class FragmentContact extends Fragment {
     @BindView(R.id.tmListError)
     TextView mTMError;
     private List<StudentModel> studentList;
-    private static StudentContactListAdapter studentListAdapter;
+    private static StudentContactListAdapter studentAdapter;
     private final static String TAG = FragmentContact.class.getSimpleName();
 
     public FragmentContact() {
@@ -74,7 +75,10 @@ public class FragmentContact extends Fragment {
                 if(response.isSuccessful()) {
                     studentList = response.body();
 
-                    studentListAdapter = new StudentContactListAdapter(studentList, getContext());
+                    studentAdapter = new StudentContactListAdapter(studentList, getContext());
+                    mStudentRecyclerView.setAdapter(studentAdapter);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+                    mStudentRecyclerView.setLayoutManager(layoutManager);
                     showStudentList();
                     Log.d(TAG,String.valueOf(studentList));
                 } else {
@@ -105,7 +109,7 @@ public class FragmentContact extends Fragment {
 
     //these methods change the views' visibility
     private void showStudentList() {
-        mStudentListView.setVisibility(View.VISIBLE);
+        mStudentRecyclerView.setVisibility(View.VISIBLE);
     }
     private void showTmList() {
         mTMListView.setVisibility(View.VISIBLE);
