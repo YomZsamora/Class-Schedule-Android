@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -17,7 +18,7 @@ import com.moringa.class_schedule_app.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SessionsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class SessionsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener, com.moringa.class_schedule_app.ui.DatePicker {
     @BindView(R.id.submitButton) Button mSubmitButton;
     @BindView(R.id.editTextSessionName) EditText mEditTextSessionName;
     @BindView(R.id.editTextStartTime) EditText mEditTextStartTime;
@@ -56,6 +57,11 @@ public class SessionsActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
     }
 
