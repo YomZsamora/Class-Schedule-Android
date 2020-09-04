@@ -1,6 +1,8 @@
 package com.moringa.class_schedule_app.ui;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -25,7 +27,9 @@ import java.util.Calendar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CreateSessionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener, com.moringa.class_schedule_app.ui.DatePicker, com.moringa.class_schedule_app.ui.TimePicker {
+public class CreateSessionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+//    com.moringa.class_schedule_app.ui.DatePicker
+//    com.moringa.class_schedule_app.ui.TimePicker
     @BindView(R.id.submitButton) Button mSubmitButton;
     @BindView(R.id.editTextSessionName) EditText mEditTextSessionName;
     @BindView(R.id.textViewStartTime) TextView mTextViewStartTime;
@@ -77,7 +81,6 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
 
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
         mTextViewStartTime.setText(hourOfDay + ":" + minute);
