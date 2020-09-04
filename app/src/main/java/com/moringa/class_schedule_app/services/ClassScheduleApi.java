@@ -39,7 +39,7 @@ public interface ClassScheduleApi {
     );
     //get list of students
     @GET("students")
-    Call<StudentsApiResponse> getStudentsList();
+    Call<List<StudentModel>> getStudentsList();
 
     //TECHNICAL MENTORS
     //create technical mentor account

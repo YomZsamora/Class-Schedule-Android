@@ -11,15 +11,16 @@ import android.widget.TextView;
 import com.moringa.class_schedule_app.models.StudentModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.moringa.class_schedule_app.R;
 
 public class StudentContactListAdapter extends ArrayAdapter<StudentModel> {
 
-    private ArrayList<StudentModel> students;
+    private List<StudentModel> students;
     Context mContext;
 
-    public StudentContactListAdapter(ArrayList<StudentModel> students, Context context) {
+    public StudentContactListAdapter(List<StudentModel> students, Context context) {
         super(context, R.layout.contact_list_item);
         this.students = students;
         this.mContext = context;
