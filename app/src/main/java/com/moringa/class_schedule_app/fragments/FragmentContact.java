@@ -84,6 +84,7 @@ public class FragmentContact extends Fragment {
                     mStudentRecyclerView.setAdapter(studentAdapter);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
                     mStudentRecyclerView.setLayoutManager(layoutManager);
+                    mStudentRecyclerView.setNestedScrollingEnabled(false);
                     showStudentList();
                 } else {
                     hideProgressBar();
@@ -113,6 +114,7 @@ public class FragmentContact extends Fragment {
                     mTMRecyclerView.setAdapter(tmContactListAdapter);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
                     mTMRecyclerView.setLayoutManager(layoutManager);
+                    mTMRecyclerView.setNestedScrollingEnabled(false);
                     showTmList();
                 } else {
                     hideProgressBar();
