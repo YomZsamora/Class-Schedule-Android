@@ -1,6 +1,6 @@
 package com.moringa.class_schedule_app.services;
 
-import com.moringa.class_schedule_app.utils.Constants;
+import com.moringa.class_schedule_app.Constants;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;

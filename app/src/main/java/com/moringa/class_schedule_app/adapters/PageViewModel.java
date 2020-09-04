@@ -1,4 +1,4 @@
-package com.moringa.class_schedule_app.ui.main;
+package com.moringa.class_schedule_app.adapters;
 
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;

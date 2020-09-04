@@ -1,4 +1,4 @@
-package com.moringa.class_schedule_app.ui.main;
+package com.moringa.class_schedule_app.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.moringa.class_schedule_app.R;
+import com.moringa.class_schedule_app.adapters.PageViewModel;
 
 
 /**

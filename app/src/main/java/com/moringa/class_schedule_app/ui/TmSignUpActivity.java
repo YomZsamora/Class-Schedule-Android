@@ -129,7 +129,7 @@ public class TmSignUpActivity extends AppCompatActivity implements View.OnClickL
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 final FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    Intent intent = new Intent(TmSignUpActivity.this, Main.class);
+                    Intent intent = new Intent(TmSignUpActivity.this, HomeActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();

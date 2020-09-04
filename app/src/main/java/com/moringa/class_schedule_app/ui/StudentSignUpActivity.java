@@ -144,7 +144,7 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 final FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    Intent intent = new Intent(StudentSignUpActivity.this, Main.class);
+                    Intent intent = new Intent(StudentSignUpActivity.this, HomeActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
