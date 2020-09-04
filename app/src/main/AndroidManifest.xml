@@ -20,6 +20,8 @@
         </activity>
         <activity android:name=".ui.AccountTypeActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+        <activity android:name=".ui.CreateSessionActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity android:name=".ui.TmSignUpActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity android:name=".ui.SessionDetailsActivity" />
