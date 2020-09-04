@@ -1,8 +1,6 @@
 package com.moringa.class_schedule_app.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,18 +11,21 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.TimePicker;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import com.moringa.class_schedule_app.R;
 import com.moringa.class_schedule_app.fragments.FragmentDate;
+import com.moringa.class_schedule_app.fragments.TimeFragment;
 
-import java.text.DateFormat;
 import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CreateSessionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener, com.moringa.class_schedule_app.ui.DatePicker {
+public class CreateSessionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener, com.moringa.class_schedule_app.ui.DatePicker, com.moringa.class_schedule_app.ui.TimePicker {
     @BindView(R.id.submitButton) Button mSubmitButton;
     @BindView(R.id.editTextSessionName) EditText mEditTextSessionName;
     @BindView(R.id.textViewStartTime) TextView mTextViewStartTime;
@@ -57,8 +58,7 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
-        String text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -77,6 +77,13 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
 
     }
 
+    @SuppressLint("SetTextI18n")
+    @Override
+    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+        mTextViewStartTime.setText(hourOfDay + ":" + minute);
+        mTextViewEndTime.setText(hourOfDay + ":" + minute);
+    }
+
     @Override
     public void onClick(View view) {
         if (view == mSubmitButton) {
@@ -90,6 +97,17 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
             DialogFragment datePicker = new FragmentDate();
             datePicker.show(getSupportFragmentManager(), "date picker");
 
+        }
+
+        if (view == mTextViewStartTime) {
+//            showTimeDialog(mEditTextStartTime);
+            DialogFragment timePicker = new TimeFragment();
+            timePicker.show(getSupportFragmentManager(), "time picker");
+        }
+
+        if (view == mTextViewEndTime) {
+            DialogFragment timePicker = new TimeFragment();
+            timePicker.show(getSupportFragmentManager(), "time picker");
         }
 
     }
