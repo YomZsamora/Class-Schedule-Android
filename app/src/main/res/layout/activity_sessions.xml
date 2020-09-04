@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context="com.moringa.class_schedule_app.ui.main.SessionsActivity">
+    tools:context="com.moringa.class_schedule_app.ui.SessionsActivity">
 
     <TextView
         android:id="@+id/loginTextView"
@@ -12,7 +12,7 @@
         android:layout_above="@+id/linearLayout"
         android:layout_marginStart="30dp"
         android:text="Add a new session"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorSecondary"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -140,7 +140,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="Submit"
-            android:background="@color/colorAccent"
+            android:background="@color/colorSecondary"
             android:layout_marginTop="15dp"
             android:textColor="@color/colorTextIcons" />
 

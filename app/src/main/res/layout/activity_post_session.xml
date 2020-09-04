@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_gravity="center"
     android:layout_height="match_parent"
-    tools:context="com.moringa.class_schedule_app.ui.Post">
+    tools:context="com.moringa.class_schedule_app.ui.PostSessionActivity">
 <RelativeLayout
     android:layout_width="match_parent"
     android:gravity="center"

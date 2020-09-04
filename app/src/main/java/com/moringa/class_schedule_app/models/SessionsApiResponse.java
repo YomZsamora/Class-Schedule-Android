@@ -14,7 +14,7 @@ public class SessionsApiResponse {
 
     @SerializedName("sessions")
     @Expose
-    private List<SessionsModel> sessions = null;
+    public List<SessionsModel> sessions = null;
 
     public SessionsApiResponse() {
     }

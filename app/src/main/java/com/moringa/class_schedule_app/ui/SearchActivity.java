@@ -24,7 +24,7 @@ import com.moringa.class_schedule_app.fireModel.Fmodel;
 
 import java.util.ArrayList;
 
-public class Search extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity {
     View root;
     DatabaseReference db;
     RecyclerView firebase_rec;
@@ -49,13 +49,13 @@ public class Search extends AppCompatActivity {
                     Fmodel p=dataSnapshot.getValue(Fmodel.class);
                     list.add(p);
                 }
-                adapter=new MyviewAdapter(Search.this,list);
+                adapter=new MyviewAdapter(SearchActivity.this,list);
                 firebase_rec.setAdapter(adapter);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(Search.this, "something went wrong check your connection", Toast.LENGTH_LONG).show();
+                Toast.makeText(SearchActivity.this, "something went wrong check your connection", Toast.LENGTH_LONG).show();
             }
         });
     }

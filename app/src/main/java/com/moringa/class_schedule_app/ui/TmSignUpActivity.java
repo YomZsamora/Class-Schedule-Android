@@ -1,4 +1,4 @@
-package com.moringa.class_schedule_app.ui.main;
+package com.moringa.class_schedule_app.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,11 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,24 +20,27 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.moringa.class_schedule_app.R;
-import com.moringa.class_schedule_app.ui.Main;
-import com.moringa.class_schedule_app.ui.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class StudentSignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, StudentSignUpActivityInterface {
+public class TmSignUpActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String TAG = StudentSignUpActivity.class.getSimpleName();
     private ProgressDialog mAuthProgressDialog;
     private String mName;
 
-    @BindView(R.id.createAccountButton) Button mCreateAccountButton;
-    @BindView(R.id.logTextView) TextView mLogTextView;
-    @BindView(R.id.editTextName) EditText mEditTextName;
-    @BindView(R.id.editTextEmail) EditText mEditTextEmail;
-    @BindView(R.id.cohort_spinner) Spinner mCohortSpinner;
-    @BindView(R.id.editTextPassword) EditText mEditTextPassword;
-    @BindView(R.id.editTextConfirmPassword) EditText mEditTextConfirmPassword;
+    @BindView(R.id.createAccountButton)
+    Button mCreateAccountButton;
+    @BindView(R.id.logTextView)
+    TextView mLogTextView;
+    @BindView(R.id.editTextName)
+    EditText mEditTextName;
+    @BindView(R.id.editTextEmail)
+    EditText mEditTextEmail;
+    @BindView(R.id.editTextPassword)
+    EditText mEditTextPassword;
+    @BindView(R.id.editTextConfirmPassword)
+    EditText mEditTextConfirmPassword;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -48,7 +48,7 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_sign_up);
+        setContentView(R.layout.activity_tm_sign_up);
         createAuthProgressDialog();
 
         mAuth = FirebaseAuth.getInstance();
@@ -66,15 +66,9 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
 
         createAuthStateListener();
 
-        Spinner spinner = findViewById(R.id.cohort_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cohorts, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter((adapter));
-        spinner.setOnItemSelectedListener(this);
-
         ButterKnife.bind(this);
-        mCreateAccountButton.setOnClickListener((View.OnClickListener) this);
-        mLogTextView.setOnClickListener((View.OnClickListener) this);
+        mCreateAccountButton.setOnClickListener(this);
+        mLogTextView.setOnClickListener(this);
     }
 
     private void createAuthProgressDialog() {
@@ -85,28 +79,17 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
-        String text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
-    }
-
-    @Override
     public void onClick(View view) {
         if (view == mLogTextView) {
-            Intent intent = new Intent(StudentSignUpActivity.this, LoginActivity.class);
+            Intent intent = new Intent(TmSignUpActivity.this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
         }
+
         if (view == mCreateAccountButton) {
             createNewUser();
         }
-
     }
 
     private void createNewUser() {
@@ -132,7 +115,7 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
                             Log.d(TAG, "Authentication successful");
                             createFirebaseUserProfile(task.getResult().getUser());
                         } else {
-                            Toast.makeText(StudentSignUpActivity.this, "Authentication failed.",
+                            Toast.makeText(TmSignUpActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -146,7 +129,7 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 final FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    Intent intent = new Intent(StudentSignUpActivity.this, Main.class);
+                    Intent intent = new Intent(TmSignUpActivity.this, Main.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
@@ -167,7 +150,7 @@ public class StudentSignUpActivity extends AppCompatActivity implements AdapterV
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Log.d(TAG, user.getDisplayName());
+//                            Log.d(TAG, user.getDisplayName());
                         }
                     }
 

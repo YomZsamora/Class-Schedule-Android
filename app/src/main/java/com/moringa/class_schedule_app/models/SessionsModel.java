@@ -11,25 +11,25 @@ import java.sql.Timestamp;
 public class SessionsModel {
     @SerializedName("session_name")
     @Expose
-    private String sessionName;
+    public String sessionName;
     @SerializedName("description")
     @Expose
-    private String description;
+    public String description;
     @SerializedName("cohort_id")
     @Expose
-    private Integer cohortId;
+    public Integer cohortId;
     @SerializedName("module_id")
     @Expose
-    private Integer moduleId;
+    public Integer moduleId;
     @SerializedName("start_time")
     @Expose
-    private Timestamp startTime;
+    public Timestamp startTime;
     @SerializedName("end_time")
     @Expose
-    private Timestamp endTime;
+    public Timestamp endTime;
     @SerializedName("id")
     @Expose
-    private Integer id;
+    public Integer id;
 
     /**
      * No args constructor for use in serialization

@@ -1,4 +1,4 @@
-package com.moringa.class_schedule_app.ui.main;
+package com.moringa.class_schedule_app.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,12 +13,11 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.moringa.class_schedule_app.R;
-import com.moringa.class_schedule_app.ui.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SessionsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, SessionsActivityInterface {
+public class SessionsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
     @BindView(R.id.submitButton) Button mSubmitButton;
     @BindView(R.id.editTextSessionName) EditText mEditTextSessionName;
     @BindView(R.id.editTextStartTime) EditText mEditTextStartTime;

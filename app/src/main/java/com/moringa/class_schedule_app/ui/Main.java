@@ -21,9 +21,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.moringa.class_schedule_app.R;
-import com.moringa.class_schedule_app.ui.main.HomeActivity;
 import com.moringa.class_schedule_app.ui.main.SectionsPagerAdapter;
-import com.moringa.class_schedule_app.ui.main.StudentSignUpActivity;
 
 public class Main extends AppCompatActivity {
     Toolbar toolbar;
@@ -55,7 +53,7 @@ public class Main extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Main.this,Post.class));
+                startActivity(new Intent(Main.this,PostSessionActivity.class));
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
             }
@@ -74,7 +72,7 @@ public class Main extends AppCompatActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.search_menu:
-                Intent i = new Intent(Main.this, Search.class);
+                Intent i = new Intent(Main.this, SearchActivity.class);
                 startActivity(i);
                 break;
             case R.id.logout_menu:

@@ -9,19 +9,19 @@ import org.parceler.Parcel;
 public class StudentModel {
     @SerializedName("name")
     @Expose
-    private String name;
+    public String name;
     @SerializedName("uid")
     @Expose
-    private String uid;
+    public String uid;
     @SerializedName("track")
     @Expose
-    private String track;
+    public String track;
     @SerializedName("cohort_id")
     @Expose
-    private Integer cohortId;
+    public Integer cohortId;
     @SerializedName("id")
     @Expose
-    private Integer id;
+    public Integer id;
 
     /**
      * No args constructor for use in serialization

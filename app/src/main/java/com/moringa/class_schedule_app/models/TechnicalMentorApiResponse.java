@@ -12,7 +12,7 @@ public class TechnicalMentorApiResponse {
 
     @SerializedName("students")
     @Expose
-    private ArrayList<TechnicalMentorModel> technicalMentors = null;
+    public ArrayList<TechnicalMentorModel> technicalMentors = null;
 
     public TechnicalMentorApiResponse() {
     }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.moringa.class_schedule_app.ui.main.AccountTypeActivity">
+    tools:context="com.moringa.class_schedule_app.ui.AccountTypeActivity">
 
     <LinearLayout
         android:background="@drawable/home_bg"

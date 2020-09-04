@@ -10,13 +10,13 @@ public class CohortModel {
 
     @SerializedName("name")
     @Expose
-    private String name;
+    public String name;
     @SerializedName("start_date")
     @Expose
-    private String startDate;
+    public String startDate;
     @SerializedName("id")
     @Expose
-    private Integer id;
+    public Integer id;
 
     /**
      * No args constructor for use in serialization

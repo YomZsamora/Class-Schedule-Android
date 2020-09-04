@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ModulesApiResponse {
     @SerializedName("students")
     @Expose
-    private ArrayList<ModuleModel> modules = null;
+    public ArrayList<ModuleModel> modules = null;
 
     public ModulesApiResponse() {
     }

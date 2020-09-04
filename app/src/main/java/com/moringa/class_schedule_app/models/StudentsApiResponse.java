@@ -12,7 +12,7 @@ public class StudentsApiResponse {
 
     @SerializedName("students")
     @Expose
-    private ArrayList<StudentModel> students = null;
+    public ArrayList<StudentModel> students = null;
 
     public StudentsApiResponse() {
     }

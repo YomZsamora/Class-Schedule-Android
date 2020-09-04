@@ -9,10 +9,10 @@ import org.parceler.Parcel;
 public class ModuleModel {
     @SerializedName("name")
     @Expose
-    private String name;
+    public String name;
     @SerializedName("id")
     @Expose
-    private Integer id;
+    public Integer id;
 
     /**
      * No args constructor for use in serialization

@@ -10,13 +10,13 @@ public class TechnicalMentorModel {
 
     @SerializedName("name")
     @Expose
-    private String name;
+    public String name;
     @SerializedName("uid")
     @Expose
-    private String uid;
+    public String uid;
     @SerializedName("id")
     @Expose
-    private Integer id;
+    public Integer id;
 
     /**
      * No args constructor for use in serialization

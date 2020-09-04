@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class CohortsApiResponse {
     @SerializedName("students")
     @Expose
-    private ArrayList<CohortModel> cohorts = null;
+    public ArrayList<CohortModel> cohorts = null;
 
     public CohortsApiResponse() {
     }

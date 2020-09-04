@@ -1,4 +1,4 @@
-package com.moringa.class_schedule_app.ui.main;
+package com.moringa.class_schedule_app.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,8 +18,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.moringa.class_schedule_app.R;
-import com.moringa.class_schedule_app.ui.Main;
-import com.moringa.class_schedule_app.ui.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
