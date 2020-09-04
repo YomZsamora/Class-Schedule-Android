@@ -80,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/contactProgressBar2"/>
-            <ListView
+            <androidx.recyclerview.widget.RecyclerView
                 android:visibility="gone"
                 android:scrollbarThumbVertical="@color/colorPrimaryLight"
                 android:divider="@color/colorPrimaryLight"

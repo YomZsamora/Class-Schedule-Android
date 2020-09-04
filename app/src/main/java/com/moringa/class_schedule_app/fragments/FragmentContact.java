@@ -17,7 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.moringa.class_schedule_app.R;
 import com.moringa.class_schedule_app.adapters.StudentContactListAdapter;
+import com.moringa.class_schedule_app.adapters.TMContactListAdapter;
 import com.moringa.class_schedule_app.models.StudentModel;
+import com.moringa.class_schedule_app.models.TechnicalMentorModel;
 import com.moringa.class_schedule_app.services.ClassScheduleApi;
 import com.moringa.class_schedule_app.services.ClassScheduleClient;
 
@@ -34,7 +36,7 @@ public class FragmentContact extends Fragment {
     @BindView(R.id.studentsContactList)
     RecyclerView mStudentRecyclerView;
     @BindView(R.id.tmContactsList)
-    ListView mTMListView;
+    RecyclerView mTMRecyclerView;
     @BindView(R.id.contactProgressBar)
     ProgressBar mStudentProgressBar;
     @BindView(R.id.contactProgressBar2)
@@ -44,7 +46,9 @@ public class FragmentContact extends Fragment {
     @BindView(R.id.tmListError)
     TextView mTMError;
     private List<StudentModel> studentList;
+    private List<TechnicalMentorModel> tmList;
     private static StudentContactListAdapter studentAdapter;
+    private static TMContactListAdapter tmContactListAdapter;
     private final static String TAG = FragmentContact.class.getSimpleName();
 
     public FragmentContact() {
@@ -61,6 +65,7 @@ public class FragmentContact extends Fragment {
         View view =inflater.inflate(R.layout.fragment_contact,container,false);
         ButterKnife.bind(this, view);
         getStudentList();
+        getTMList();
         return view;
     }
 
@@ -80,16 +85,43 @@ public class FragmentContact extends Fragment {
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
                     mStudentRecyclerView.setLayoutManager(layoutManager);
                     showStudentList();
-                    Log.d(TAG,String.valueOf(studentList));
                 } else {
                     hideProgressBar();
                     showUnsuccessfulMessage();
-                    Log.d(TAG,"on unsuccessful");
                 }
             }
 
             @Override
             public void onFailure(Call<List<StudentModel>> call, Throwable t) {
+                hideProgressBar();
+                showFailureMessage();
+            }
+        });
+    }
+
+    private void getTMList() {
+        ClassScheduleApi client = ClassScheduleClient.getClient();
+        Call<List<TechnicalMentorModel>> call = client.getTechnicalMentorsList();
+        call.enqueue(new Callback<List<TechnicalMentorModel>>() {
+            @Override
+            public void onResponse(Call<List<TechnicalMentorModel>> call, Response<List<TechnicalMentorModel>> response) {
+                hideTMProgressBar();
+                if(response.isSuccessful()) {
+                    tmList = response.body();
+
+                    tmContactListAdapter = new TMContactListAdapter(tmList, getContext());
+                    mTMRecyclerView.setAdapter(tmContactListAdapter);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+                    mTMRecyclerView.setLayoutManager(layoutManager);
+                    showTmList();
+                } else {
+                    hideProgressBar();
+                    showUnsuccessfulMessage();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<TechnicalMentorModel>> call, Throwable t) {
                 hideProgressBar();
                 showFailureMessage();
                 Log.d(TAG,"on failure", t);
@@ -112,11 +144,14 @@ public class FragmentContact extends Fragment {
         mStudentRecyclerView.setVisibility(View.VISIBLE);
     }
     private void showTmList() {
-        mTMListView.setVisibility(View.VISIBLE);
+        mTMRecyclerView.setVisibility(View.VISIBLE);
     }
 
     private void hideProgressBar() {
         mStudentProgressBar.setVisibility(View.GONE);
+    }
+    private void hideTMProgressBar() {
+        mTMProgressBar.setVisibility(View.GONE);
     }
 
     private void showProgressBar() {

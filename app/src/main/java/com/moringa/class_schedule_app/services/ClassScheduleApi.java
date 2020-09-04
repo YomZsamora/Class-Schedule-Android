@@ -48,7 +48,7 @@ public interface ClassScheduleApi {
             @Body TechnicalMentorModel technicalMentor
     );
     @GET("mentors")
-    Call<TechnicalMentorApiResponse> getTechnicalMentorsList();
+    Call<List<TechnicalMentorModel>> getTechnicalMentorsList();
 
     //MODULES
     @GET("modules")
