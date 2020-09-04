@@ -1,4 +1,4 @@
-package com.moringa.class_schedule_app.fireModel;
+package com.moringa.class_schedule_app.firebase;
 
 public class SetData {
     String title,tm,desc;

@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.moringa.class_schedule_app.R;
-import com.moringa.class_schedule_app.fireModel.Fmodel;
+import com.moringa.class_schedule_app.firebase.Fmodel;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.moringa.class_schedule_app.fireModel;
+package com.moringa.class_schedule_app.firebase;
 
 public class Fmodel {
     private String name,password,email,cohort;
