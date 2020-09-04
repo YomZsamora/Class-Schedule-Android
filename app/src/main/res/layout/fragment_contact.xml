@@ -31,6 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"
+                android:divider="@color/colorPrimaryLight"
                 android:background="@color/colorSecondaryLight" >
             </ListView>
 
@@ -50,6 +51,7 @@
 
             <ListView
                 android:scrollbarThumbVertical="@color/colorPrimaryLight"
+                android:divider="@color/colorPrimaryLight"
                 android:id="@+id/tmContactsList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
