@@ -27,8 +27,6 @@ public class SessionsActivity extends AppCompatActivity implements AdapterView.O
     @BindView(R.id.editTextModule) EditText mEditTextModule;
     @BindView(R.id.editTextDescription) EditText mEditTextDescription;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +41,11 @@ public class SessionsActivity extends AppCompatActivity implements AdapterView.O
         ButterKnife.bind(this);
         mSubmitButton.setOnClickListener((View.OnClickListener) this);
         mEditTextSessionName.setOnClickListener((View.OnClickListener) this);
-        mEditTextStartTime.setOnClickListener((View.OnClickListener) this);
+        mEditTextStartTime.setOnClickListener((View.OnClickListener)this);
         mEditTextEndTime.setOnClickListener((View.OnClickListener) this);
-        mEditTextDate.setOnClickListener((View.OnClickListener) this);
         mEditTextModule.setOnClickListener((View.OnClickListener) this);
         mEditTextDescription.setOnClickListener((View.OnClickListener) this);
+        mEditTextDate.setOnClickListener((View.OnClickListener)this);
     }
 
     @Override
