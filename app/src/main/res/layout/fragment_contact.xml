@@ -25,8 +25,24 @@
                 android:layout_height="2dp"
                 android:src="@drawable/title_underline"/>
 
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/contactProgressBar"/>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/studentListError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/errorLightRed"
+                android:text="Error"
+                android:gravity="center"/>
+
             <ListView
                 android:id="@+id/studentsContactList"
+                android:visibility="gone"
                 android:scrollbarThumbVertical="@color/colorPrimaryLight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,7 +65,22 @@
                 android:layout_height="2dp"
                 android:src="@drawable/title_underline"/>
 
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tmListError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/errorLightRed"
+                android:text="Error"
+                android:gravity="center"/>
+
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/contactProgressBar2"/>
             <ListView
+                android:visibility="gone"
                 android:scrollbarThumbVertical="@color/colorPrimaryLight"
                 android:divider="@color/colorPrimaryLight"
                 android:id="@+id/tmContactsList"
