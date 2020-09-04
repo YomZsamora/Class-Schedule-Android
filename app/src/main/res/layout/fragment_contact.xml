@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="fill_parent"
         android:background="@color/colorSecondaryLight"
         android:layout_height="wrap_content"
@@ -40,7 +41,7 @@
                 android:text="Error"
                 android:gravity="center"/>
 
-            <ListView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/studentsContactList"
                 android:visibility="gone"
                 android:scrollbarThumbVertical="@color/colorPrimaryLight"
@@ -49,7 +50,7 @@
                 android:layout_marginTop="10dip"
                 android:divider="@color/colorPrimaryLight"
                 android:background="@color/colorSecondaryLight" >
-            </ListView>
+            </androidx.recyclerview.widget.RecyclerView>
 
             <TextView
                 android:layout_width="match_parent"
@@ -87,8 +88,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"
-                android:background="@color/colorSecondaryLight" >
-            </ListView>
+                android:background="@color/colorSecondaryLight"
+                tools:ignore="NestedScrolling"/>
         </LinearLayout>
 
     </ScrollView>

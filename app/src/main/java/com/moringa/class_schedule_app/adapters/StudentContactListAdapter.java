@@ -21,39 +21,21 @@ public class StudentContactListAdapter extends ArrayAdapter<StudentModel> {
     Context mContext;
 
     public StudentContactListAdapter(List<StudentModel> students, Context context) {
-        super(context, R.layout.contact_list_item);
+        super(context, R.layout.contact_list_item, students);
         this.students = students;
         this.mContext = context;
     }
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-        StudentModel student = getItem(position);
-        // Check if an existing view is being reused, otherwise inflate the view
-        ViewHolder viewHolder;
-        final View result;
-        if (view == null) {
-            viewHolder = new ViewHolder();
-            LayoutInflater inflater = LayoutInflater.from(getContext());
-            view = inflater.inflate(R.layout.contact_list_item, parent, false);
-            viewHolder.username = (TextView) view.findViewById(R.id.contactUsername);
-            viewHolder.profileImage = (ImageView) view.findViewById(R.id.userProfileContact);
-
-            result = view;
-            view.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) view.getTag();
-            result = view;
-        }
-
-        viewHolder.username.setText(student.getName());
-        return view;
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View rowView = inflater.inflate(R.layout.contact_list_item, parent, false);
+        TextView username = (TextView) rowView.findViewById(R.id.contactUsername);
+        ImageView profilePic = (ImageView) rowView.findViewById(R.id.userProfileContact);
+        profilePic.setImageResource(R.drawable.profile_pic);
+        username.setText(students.get(position).getName());
+        return rowView;
     }
 
-    // View lookup cache
-    private static class ViewHolder {
-        TextView username;
-        ImageView profileImage;
-    }
 
 }
