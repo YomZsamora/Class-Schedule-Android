@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.moringa.class_schedule_app.R;
@@ -26,9 +27,9 @@ import butterknife.ButterKnife;
 public class CreateSessionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener, com.moringa.class_schedule_app.ui.DatePicker {
     @BindView(R.id.submitButton) Button mSubmitButton;
     @BindView(R.id.editTextSessionName) EditText mEditTextSessionName;
-    @BindView(R.id.editTextStartTime) EditText mEditTextStartTime;
-    @BindView(R.id.editTextEndTime) EditText mEditTextEndTime;
-    @BindView(R.id.editTextDate) EditText mEditTextDate;
+    @BindView(R.id.textViewStartTime) TextView mTextViewStartTime;
+    @BindView(R.id.textViewEndTime) TextView mTextViewEndTime;
+    @BindView(R.id.textViewDate) TextView mTextViewDate;
     @BindView(R.id.cohort_spinner) Spinner mCohortSpinner;
     @BindView(R.id.editTextModule) EditText mEditTextModule;
     @BindView(R.id.editTextDescription) EditText mEditTextDescription;
@@ -47,11 +48,11 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
         ButterKnife.bind(this);
         mSubmitButton.setOnClickListener((View.OnClickListener) this);
         mEditTextSessionName.setOnClickListener((View.OnClickListener) this);
-        mEditTextStartTime.setOnClickListener((View.OnClickListener)this);
-        mEditTextEndTime.setOnClickListener((View.OnClickListener) this);
+        mTextViewStartTime.setOnClickListener((View.OnClickListener)this);
+        mTextViewEndTime.setOnClickListener((View.OnClickListener) this);
         mEditTextModule.setOnClickListener((View.OnClickListener) this);
         mEditTextDescription.setOnClickListener((View.OnClickListener) this);
-        mEditTextDate.setOnClickListener((View.OnClickListener)this);
+        mTextViewDate.setOnClickListener((View.OnClickListener)this);
     }
 
     @Override
@@ -71,8 +72,8 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        String currentDateString = DateFormat.getDateInstance(DateFormat.SHORT).format(calendar.getTime());
-        mEditTextDate.setText(currentDateString);
+        String currentDateString = dayOfMonth + "/" + month + "/" + year;
+        mTextViewDate.setText(currentDateString);
 
     }
 
@@ -85,7 +86,7 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
             finish();
         }
 
-        if (view == mEditTextDate) {
+        if (view == mTextViewDate) {
             DialogFragment datePicker = new FragmentDate();
             datePicker.show(getSupportFragmentManager(), "date picker");
 

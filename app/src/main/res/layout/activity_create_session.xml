@@ -48,8 +48,8 @@
             android:textColorHint="@color/colorDivider"
             android:textSize="15sp"/>
 
-        <EditText
-            android:id="@+id/editTextStartTime"
+        <TextView
+            android:id="@+id/textViewStartTime"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:background="@drawable/circular_corners"
@@ -62,8 +62,8 @@
             android:textColorHint="@color/colorDivider"
             android:textSize="15sp"/>
 
-        <EditText
-            android:id="@+id/editTextEndTime"
+        <TextView
+            android:id="@+id/textViewEndTime"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:background="@drawable/circular_corners"
@@ -78,8 +78,8 @@
             android:textSize="15sp"
             android:layout_marginStart="150dp"/>
 
-        <EditText
-            android:id="@+id/editTextDate"
+        <TextView
+            android:id="@+id/textViewDate"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:background="@drawable/circular_corners"
