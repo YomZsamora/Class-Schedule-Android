@@ -1,38 +1,44 @@
 package com.moringa.class_schedule_app.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.moringa.class_schedule_app.R;
+import com.moringa.class_schedule_app.fragments.FragmentDate;
+
+import java.text.DateFormat;
+import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SessionsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class CreateSessionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener, DatePickerDialog.OnDateSetListener {
     @BindView(R.id.submitButton) Button mSubmitButton;
     @BindView(R.id.editTextSessionName) EditText mEditTextSessionName;
-    @BindView(R.id.editTextStartTime) EditText mEditTextStartTime;
-    @BindView(R.id.editTextEndTime) EditText mEditTextEndTime;
-    @BindView(R.id.editTextDate) EditText mEditTextDate;
+    @BindView(R.id.textViewStartTime) TextView mTextViewStartTime;
+    @BindView(R.id.textViewEndTime) TextView mTextViewEndTime;
+    @BindView(R.id.textViewDate) TextView mTextViewDate;
     @BindView(R.id.cohort_spinner) Spinner mCohortSpinner;
     @BindView(R.id.editTextModule) EditText mEditTextModule;
     @BindView(R.id.editTextDescription) EditText mEditTextDescription;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sessions);
+        setContentView(R.layout.activity_create_session);
 
         Spinner spinner = findViewById(R.id.cohort_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cohorts, android.R.layout.simple_spinner_item);
@@ -43,11 +49,11 @@ public class SessionsActivity extends AppCompatActivity implements AdapterView.O
         ButterKnife.bind(this);
         mSubmitButton.setOnClickListener((View.OnClickListener) this);
         mEditTextSessionName.setOnClickListener((View.OnClickListener) this);
-        mEditTextStartTime.setOnClickListener((View.OnClickListener) this);
-        mEditTextEndTime.setOnClickListener((View.OnClickListener) this);
-        mEditTextDate.setOnClickListener((View.OnClickListener) this);
+        mTextViewStartTime.setOnClickListener((View.OnClickListener)this);
+        mTextViewEndTime.setOnClickListener((View.OnClickListener) this);
         mEditTextModule.setOnClickListener((View.OnClickListener) this);
         mEditTextDescription.setOnClickListener((View.OnClickListener) this);
+        mTextViewDate.setOnClickListener((View.OnClickListener)this);
     }
 
     @Override
@@ -62,12 +68,29 @@ public class SessionsActivity extends AppCompatActivity implements AdapterView.O
     }
 
     @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        String currentDateString = dayOfMonth + "/" + month + "/" + year;
+        mTextViewDate.setText(currentDateString);
+
+    }
+
+    @Override
     public void onClick(View view) {
         if (view == mSubmitButton) {
-            Intent intent = new Intent(SessionsActivity.this, MainActivity.class);
+            Intent intent = new Intent(CreateSessionActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
+        }
+
+        if (view == mTextViewDate) {
+            DialogFragment datePicker = new FragmentDate();
+            datePicker.show(getSupportFragmentManager(), "date picker");
+
         }
 
     }
