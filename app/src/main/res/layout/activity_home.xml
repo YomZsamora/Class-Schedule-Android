@@ -30,11 +30,12 @@
             android:id="@+id/tabs"
             android:theme="@style/ThemeOverlay.AppCompat.Light"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabIndicatorColor="@color/light_blue"
-            app:tabSelectedTextColor="@color/light_blue"
-            app:tabTextColor="@color/textgreylight"
-            app:tabIndicatorHeight="3dp"
+            android:layout_height="40dp"
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabSelectedTextColor="@color/colorPrimary"
+            app:tabTextColor="@color/colorSecondary"
+            app:tabIndicatorHeight="2dp"
+            app:tabIndicatorFullWidth="false"
             android:background="@color/white" />
     </LinearLayout>
 

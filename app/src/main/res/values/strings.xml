@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">Class-Schedule-App</string>
+    <string name="app_name">Class Schedule</string>
 
     <string name="title_activity_main">Main</string>
-    <string name="tab_text_1">home</string>
-    <string name="tab_text_2">contact</string>
+    <string name="tab_text_1">Sessions</string>
+    <string name="tab_text_2">Contacts</string>
     <string name="tab_text_3">notification</string>
     <string name="tab_text_4">extras</string>
     <string name="cohort">Cohort</string>
