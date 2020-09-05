@@ -1,6 +1,7 @@
 package com.moringa.class_schedule_app.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,18 +25,21 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.moringa.class_schedule_app.R;
 import com.moringa.class_schedule_app.adapters.SessionsListAdapter;
 import com.moringa.class_schedule_app.models.SessionsApiResponse;
 import com.moringa.class_schedule_app.models.SessionsModel;
 import com.moringa.class_schedule_app.services.ClassScheduleApi;
 import com.moringa.class_schedule_app.services.ClassScheduleClient;
+import com.moringa.class_schedule_app.ui.CreateSessionActivity;
+import com.moringa.class_schedule_app.ui.HomeActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class FragmentHome extends Fragment {
+public class FragmentHome extends Fragment implements View.OnClickListener {
 
     @BindView(R.id.homeProgressBar)
     ProgressBar mHomeProgressBar;
@@ -45,6 +49,8 @@ public class FragmentHome extends Fragment {
     TextView mErrorText;
     @BindView(R.id.sessionsSearchBox)
     EditText mSearchBox;
+    @BindView(R.id.fab)
+    FloatingActionButton mFab;
 
     private List<SessionsModel> mSessionsList;
     private SessionsListAdapter mAdapter;
@@ -65,7 +71,17 @@ public class FragmentHome extends Fragment {
         ButterKnife.bind(this, view);
         getSessionsList();
         searchSessions();
+
+        //click listeners
+        mFab.setOnClickListener(this);
         return view;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == mFab) {
+            startActivity(new Intent(getActivity(),CreateSessionActivity.class));
+        }
     }
 
     //sessions search functionality

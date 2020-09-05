@@ -38,7 +38,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         mViewPager.setAdapter(sectionsPagerAdapter);
         mTabs.setupWithViewPager(mViewPager);
-        mFab.setOnClickListener(this);
     }
 
     @Override
