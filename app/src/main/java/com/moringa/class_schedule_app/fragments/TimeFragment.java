@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.moringa.class_schedule_app.R;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class TimeFragment extends DialogFragment {

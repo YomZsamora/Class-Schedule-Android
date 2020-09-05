@@ -22,14 +22,13 @@ import com.moringa.class_schedule_app.R;
 import com.moringa.class_schedule_app.fragments.FragmentDate;
 import com.moringa.class_schedule_app.fragments.TimeFragment;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CreateSessionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
-//    com.moringa.class_schedule_app.ui.DatePicker
-//    com.moringa.class_schedule_app.ui.TimePicker
     @BindView(R.id.submitButton) Button mSubmitButton;
     @BindView(R.id.editTextSessionName) EditText mEditTextSessionName;
     @BindView(R.id.textViewStartTime) TextView mTextViewStartTime;
@@ -81,9 +80,10 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
-        mTextViewStartTime.setText(hourOfDay + ":" + minute);
+        mTextViewEndTime.setText(hourOfDay + ":" + minute);
         mTextViewEndTime.setText(hourOfDay + ":" + minute);
     }
 
@@ -104,12 +104,12 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
 
         if (view == mTextViewStartTime) {
             DialogFragment timePicker = new TimeFragment();
-            timePicker.show(getSupportFragmentManager(), "time picker");
+            timePicker.show(getSupportFragmentManager(), "Start time picker");
         }
 
         if (view == mTextViewEndTime) {
             DialogFragment timePicker = new TimeFragment();
-            timePicker.show(getSupportFragmentManager(), "time picker");
+            timePicker.show(getSupportFragmentManager(), "End time picker");
         }
 
     }
