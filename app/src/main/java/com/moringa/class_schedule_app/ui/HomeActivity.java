@@ -24,9 +24,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
-
-    @BindView(R.id.fab)
-    FloatingActionButton mFab;
     @BindView(R.id.view_pager)
     ViewPager mViewPager;
     @BindView(R.id.tabs)
@@ -46,9 +43,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        if (view == mFab) {
-            startActivity(new Intent(HomeActivity.this,CreateSessionActivity.class));
-        }
+
     }
 
     //adds the menu items to our appbar

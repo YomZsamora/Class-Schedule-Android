@@ -1,70 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:background="@color/colorSecondaryLight"
-    android:layout_height="wrap_content"
-    android:fillViewport="true">
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <androidx.core.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:background="@color/colorSecondaryLight"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
 
         <LinearLayout
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:padding="10dp"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/circular_corners"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/baseline_search_24"
-                android:layout_gravity="center"/>
+            android:layout_height="match_parent">
 
-            <EditText
-                style="@style/CardView"
-                android:id="@+id/sessionsSearchBox"
+            <LinearLayout
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/muli_italic"
-                android:hint="Search for sessions with ..."
-                android:textSize="14sp" />
+                android:background="@drawable/circular_corners"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/baseline_search_24"
+                    android:layout_gravity="center"/>
+
+                <EditText
+                    style="@style/CardView"
+                    android:id="@+id/sessionsSearchBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/muli_italic"
+                    android:hint="Search for sessions with ..."
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:requiresFadingEdge="none"
+                android:outlineAmbientShadowColor="@color/errorLightRed"
+                android:layout_height="match_parent"
+                android:id="@+id/sessionsListRecyclerView"/>
+
+            <ProgressBar
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="match_parent"
+                android:id="@+id/homeProgressBar"
+                style="?android:attr/progressBarStyle"/>
+
+            <TextView
+                android:id="@+id/homeErrorText"
+                android:layout_marginTop="40dp"
+                android:visibility="gone"
+                android:padding="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/errorLightRed"
+                android:text="Error!" />
+
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:requiresFadingEdge="none"
-            android:outlineAmbientShadowColor="@color/errorLightRed"
-            android:layout_height="match_parent"
-            android:id="@+id/sessionsListRecyclerView"/>
 
-        <ProgressBar
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:layout_height="match_parent"
-            android:id="@+id/homeProgressBar"
-            style="?android:attr/progressBarStyle"/>
+    </androidx.core.widget.NestedScrollView>
 
-        <TextView
-            android:id="@+id/homeErrorText"
-            android:layout_marginTop="40dp"
-            android:visibility="gone"
-            android:padding="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@color/errorLightRed"
-            android:text="Error!" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="25dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/baseline_add_white_48"/>
 
-    </LinearLayout>
-
-</androidx.core.widget.NestedScrollView>
+</RelativeLayout>
