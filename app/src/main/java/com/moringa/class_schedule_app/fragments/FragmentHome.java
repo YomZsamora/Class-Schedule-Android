@@ -2,10 +2,13 @@ package com.moringa.class_schedule_app.fragments;
 
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -28,6 +31,7 @@ import com.moringa.class_schedule_app.models.SessionsModel;
 import com.moringa.class_schedule_app.services.ClassScheduleApi;
 import com.moringa.class_schedule_app.services.ClassScheduleClient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -39,6 +43,8 @@ public class FragmentHome extends Fragment {
     RecyclerView mSessionsRecyclerView;
     @BindView(R.id.homeErrorText)
     TextView mErrorText;
+    @BindView(R.id.sessionsSearchBox)
+    EditText mSearchBox;
 
     private List<SessionsModel> mSessionsList;
     private SessionsListAdapter mAdapter;
@@ -58,7 +64,45 @@ public class FragmentHome extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
         getSessionsList();
+        searchSessions();
         return view;
+    }
+
+    //sessions search functionality
+    private void searchSessions() {
+        mSearchBox.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                filter(editable.toString());
+            }
+        });
+    }
+    //this method filters the sessions list and returns an array of results
+    private void filter(String text) {
+        List<SessionsModel> filteredList = new ArrayList<>();
+
+        for(SessionsModel session : mSessionsList) {
+            //we compare our session names to the entered text, we use toLowerCase for accuracy during comparison
+            if(session.getSessionName().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(session);
+            }
+        }
+        //we then use our custom adapter to list the search results
+        mAdapter = new SessionsListAdapter(filteredList, getContext());
+        mSessionsRecyclerView.setAdapter(mAdapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        mSessionsRecyclerView.setLayoutManager(layoutManager);
+        mSessionsRecyclerView.setNestedScrollingEnabled(false);
     }
 
     //gather sessions list from api
@@ -76,6 +120,7 @@ public class FragmentHome extends Fragment {
                     mSessionsRecyclerView.setAdapter(mAdapter);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
                     mSessionsRecyclerView.setLayoutManager(layoutManager);
+                    mSessionsRecyclerView.setNestedScrollingEnabled(false);
                     mSessionsRecyclerView.setHasFixedSize(true);
 
                     Log.d(TAG, String.valueOf(mSessionsList));

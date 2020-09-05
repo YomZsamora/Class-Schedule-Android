@@ -30,6 +30,7 @@
 
             <EditText
                 style="@style/CardView"
+                android:id="@+id/sessionsSearchBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/muli_italic"
