@@ -95,10 +95,15 @@ public class FragmentHome extends Fragment {
             //we compare our session names to the entered text, we use toLowerCase for accuracy during comparison
             if(session.getSessionName().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(session);
+            } else if(filteredList.isEmpty()) {
+                hideSessionsList();
+                mErrorText.setText("There is no session mathcing that");
+                mErrorText.setVisibility(View.VISIBLE);
             }
         }
         //we then use our custom adapter to list the search results
         mAdapter = new SessionsListAdapter(filteredList, getContext());
+        mAdapter.notifyDataSetChanged();
         mSessionsRecyclerView.setAdapter(mAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         mSessionsRecyclerView.setLayoutManager(layoutManager);
