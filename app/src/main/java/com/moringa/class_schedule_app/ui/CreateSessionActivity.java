@@ -103,7 +103,6 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
         }
 
         if (view == mTextViewStartTime) {
-//            showTimeDialog(mEditTextStartTime);
             DialogFragment timePicker = new TimeFragment();
             timePicker.show(getSupportFragmentManager(), "time picker");
         }
