@@ -47,7 +47,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         if (view == mFab) {
-            startActivity(new Intent(HomeActivity.this,PostSessionActivity.class));
+            startActivity(new Intent(HomeActivity.this,CreateSessionActivity.class));
         }
     }
 
