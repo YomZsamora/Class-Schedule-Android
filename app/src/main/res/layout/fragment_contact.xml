@@ -1,9 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:background="#2196F3"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:background="@color/colorSecondaryLight"
+        android:layout_height="wrap_content"
+        android:fillViewport="true" >
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dip" >
 
-</LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/muli_bold"
+                android:textColor="@color/colorPrimaryLight"
+                android:gravity="center_vertical"
+                android:textSize="18sp"
+                android:text="Students" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="2dp"
+                android:src="@drawable/title_underline"/>
+
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/contactProgressBar"/>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/studentListError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/errorLightRed"
+                android:text="Error"
+                android:gravity="center"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/studentsContactList"
+                android:visibility="gone"
+                android:scrollbarThumbVertical="@color/colorPrimaryLight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:divider="@color/colorPrimaryLight"
+                android:background="@color/colorSecondaryLight" >
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/muli_bold"
+                android:textColor="@color/colorPrimaryLight"
+                android:gravity="center_vertical"
+                android:textSize="18sp"
+                android:text="Technical Mentors" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="2dp"
+                android:src="@drawable/title_underline"/>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tmListError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/errorLightRed"
+                android:text="Error"
+                android:gravity="center"/>
+
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/contactProgressBar2"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:visibility="gone"
+                android:scrollbarThumbVertical="@color/colorPrimaryLight"
+                android:divider="@color/colorPrimaryLight"
+                android:id="@+id/tmContactsList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:background="@color/colorSecondaryLight"
+                tools:ignore="NestedScrolling"/>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView >
+

@@ -103,7 +103,7 @@ public class SessionsListAdapter extends RecyclerView.Adapter<SessionsListAdapte
 //            getModuleById(sessions.getModuleId());
 //            mSessionModule.setText(module.getName());
             // we initialize a SimpleDateFormat format so as to format the timestamp we get from api
-            SimpleDateFormat sdf = new SimpleDateFormat("HH.mm"); //we define the pattern which returns Hour:Minute
+            SimpleDateFormat sdf = new SimpleDateFormat("hh.mm aa"); //we define the pattern which returns Hour:Minute
             mSessionStartTime.setText(sdf.format(sessions.getStartTime()));
             mSessionEndTime.setText(sdf.format(sessions.getEndTime()));
         }

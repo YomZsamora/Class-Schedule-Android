@@ -1,5 +1,6 @@
 package com.moringa.class_schedule_app.ui;
 
+
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -16,6 +17,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
 import android.widget.TimePicker;
 
 import androidx.annotation.RequiresApi;
@@ -76,8 +78,10 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
         mEditTextModule.setOnClickListener((View.OnClickListener) this);
         mEditTextDescription.setOnClickListener((View.OnClickListener) this);
         mTextViewDate.setOnClickListener((View.OnClickListener)this);
+
         updateDisplay(mTextViewStartTime, start_time);
         updateDisplay(mTextViewEndTime, end_time);
+
     }
 
     @Override
@@ -100,13 +104,6 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
         mTextViewDate.setText(currentDateString);
 
     }
-
-//    @SuppressLint("SetTextI18n")
-//    @Override
-//    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
-//
-//        mTextViewEndTime.setText(hourOfDay + ":" + minute);
-//    }
 
     @Override
     public void onClick(View view) {

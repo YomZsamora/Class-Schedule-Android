@@ -33,7 +33,6 @@
             android:name=".ui.LoginActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         </activity>
-        <activity android:name=".ui.SearchActivity" />
         <activity android:name=".ui.HomeActivity" />
         <activity android:name=".ui.PostSessionActivity" />
     </application>

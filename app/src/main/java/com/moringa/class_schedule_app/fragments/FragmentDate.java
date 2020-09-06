@@ -7,18 +7,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.moringa.class_schedule_app.R;
 
 import java.util.Calendar;
 
 public class FragmentDate extends DialogFragment {
-    public class dateFragment extends DialogFragment {
         @NonNull
         @Override
         public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -29,6 +21,5 @@ public class FragmentDate extends DialogFragment {
 
             return new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener) getActivity(), year, month, day);
         }
-    }
 
 }
