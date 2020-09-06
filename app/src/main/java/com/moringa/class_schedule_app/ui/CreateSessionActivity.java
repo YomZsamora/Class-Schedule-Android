@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,16 +28,25 @@ import androidx.fragment.app.DialogFragment;
 import com.moringa.class_schedule_app.R;
 import com.moringa.class_schedule_app.fragments.FragmentDate;
 import com.moringa.class_schedule_app.fragments.TimeFragment;
+import com.moringa.class_schedule_app.models.SessionsModel;
+import com.moringa.class_schedule_app.services.ClassScheduleApi;
+import com.moringa.class_schedule_app.services.ClassScheduleClient;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CreateSessionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener, DatePickerDialog.OnDateSetListener {
+    public static final String TAG = LoginActivity.class.getSimpleName();
     @BindView(R.id.submitButton) Button mSubmitButton;
     @BindView(R.id.editTextSessionName) EditText mEditTextSessionName;
     @BindView(R.id.textViewStartTime) TextView mTextViewStartTime;
@@ -172,6 +182,46 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
     private void unregisterTimeDisplay() {
         activeDisplay = null;
         activeTime = null;
+    }
+
+    private void createNewSession() {
+        ClassScheduleApi client = ClassScheduleClient.getClient();
+        String startTime = mTextViewStartTime.getText().toString().trim();
+        Timestamp startTimeTimestamp = Timestamp.valueOf(startTime);
+        String sessionName = mEditTextSessionName.getText().toString().trim();
+        SessionsModel newSession = new SessionsModel(sessionName, de);
+        Call<SessionsModel> call = client.createNewSession(newSession);
+        call.enqueue(new Callback<List<SessionsModel>>() {
+            @Override
+            public void onResponse(Call<List<SessionsModel>> call, Response<List<SessionsModel>> response) {
+                hideProgressBar();
+                if(response.isSuccessful()){
+                    Log.d(TAG, String.valueOf(mSessionsList));
+                    //toggle the recyclerview visibility
+                } else {
+                    hideProgressBar();
+                    showUnsuccessfulMessage();
+                }
+            }
+            @Override
+            public void onFailure(Call<List<SessionsModel>> call, Throwable t) {
+                hideProgressBar();
+                showFailureMessage();
+                Log.d(TAG, "on failure", t);
+            }
+        });
+    }
+
+    private void showFailureMessage() {
+
+    }
+
+    private void showUnsuccessfulMessage() {
+
+    }
+
+    private void hideProgressBar() {
+
     }
 
 }
