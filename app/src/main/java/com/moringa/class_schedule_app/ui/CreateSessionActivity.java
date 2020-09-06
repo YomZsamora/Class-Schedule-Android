@@ -108,7 +108,7 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
     @Override
     public void onClick(View view) {
         if (view == mSubmitButton) {
-            Intent intent = new Intent(CreateSessionActivity.this, MainActivity.class);
+            Intent intent = new Intent(CreateSessionActivity.this, HomeActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
