@@ -50,7 +50,7 @@
 
         <TextView
             android:id="@+id/textViewStartTime"
-            android:layout_width="120dp"
+            android:layout_width="145dp"
             android:layout_height="wrap_content"
             android:background="@drawable/circular_corners"
             android:hint="Start Time"
@@ -63,14 +63,14 @@
 
         <TextView
             android:id="@+id/textViewEndTime"
-            android:layout_width="120dp"
+            android:layout_width="145dp"
             android:layout_height="wrap_content"
             android:background="@drawable/circular_corners"
             android:hint="End Time"
             android:nextFocusDown="@+id/submitButton"
             android:padding="10dip"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="-56dp"
+            android:layout_marginTop="-50dp"
             android:textColor="@android:color/black"
             android:textColorHint="@color/colorDivider"
             android:textSize="15sp"
@@ -91,7 +91,7 @@
         <Spinner
             android:id="@+id/cohort_spinner"
             android:layout_width="100dp"
-            android:layout_height="47dp"
+            android:layout_height="40dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/circular_corners"
             android:hint="@string/cohort"
@@ -108,11 +108,11 @@
             android:layout_height="wrap_content"
             android:background="@drawable/circular_corners"
             android:hint="Module"
-            android:inputType="datetime"
+            android:inputType="text"
             android:nextFocusDown="@+id/submitButton"
             android:padding="10dip"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="-56dp"
+            android:layout_marginTop="-50dp"
             android:textColor="@android:color/black"
             android:textColorHint="@color/colorDivider"
             android:textSize="15sp"
