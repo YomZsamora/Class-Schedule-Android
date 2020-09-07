@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import org.parceler.Parcel;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Parcel
 public class SessionsModel {
@@ -45,10 +46,9 @@ public class SessionsModel {
      * @param description
      * @param startTime
      * @param endTime
-     * @param id
      * @param moduleId
      */
-    public SessionsModel(String sessionName, String description, Integer cohortId, Integer moduleId, Timestamp startTime, Timestamp endTime, Integer id) {
+    public SessionsModel(String sessionName, String description, Integer cohortId, Integer moduleId, Timestamp startTime, Timestamp endTime) {
         super();
         this.sessionName = sessionName;
         this.description = description;
@@ -56,8 +56,8 @@ public class SessionsModel {
         this.moduleId = moduleId;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.id = id;
     }
+
 
     public String getSessionName() {
         return sessionName;
@@ -107,11 +107,4 @@ public class SessionsModel {
         this.endTime = endTime;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 }

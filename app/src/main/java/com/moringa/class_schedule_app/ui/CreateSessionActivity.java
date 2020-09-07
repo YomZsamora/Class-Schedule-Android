@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,12 +31,7 @@ import com.moringa.class_schedule_app.services.ClassScheduleApi;
 import com.moringa.class_schedule_app.services.ClassScheduleClient;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -108,7 +104,7 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        String currentDateString = dayOfMonth + "/" + month + "/" + year;
+        String currentDateString = year + "-" + month + "-" + dayOfMonth;
         mTextViewDate.setText(currentDateString);
 
     }
@@ -116,11 +112,7 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
     @Override
     public void onClick(View view) {
         if (view == mSubmitButton) {
-            try {
-                createNewSession();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            createNewSession();
             Intent intent = new Intent(CreateSessionActivity.this, HomeActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
@@ -187,39 +179,45 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
         activeTime = null;
     }
 
-    private void createNewSession() throws ParseException {
-        ClassScheduleApi client = ClassScheduleClient.getClient();
-        String startTime = mTextViewStartTime.getText().toString().trim();
-        Timestamp startTimeTimestamp = Timestamp.valueOf(startTime);
-        String endTime = mTextViewEndTime.getText().toString().trim();
-        Timestamp endTimeTimestamp = Timestamp.valueOf(endTime);
+    private void createNewSession() {
+        // valueOf() method returns a Timestamp value corresponding to the given string
+        String date=mTextViewDate.getText().toString().trim(); //"2020-08-27";  //our custom time from date picker?
+        String start_time=mTextViewStartTime.getText().toString().trim(); //"16:01:15";  //our custom time from date picker?
+        String end_time= mTextViewEndTime.getText().toString().trim(); //"16:01:15";
+        String start_time_string = String.format("%s %s", date, start_time);
+        String end_time_string = String.format("%s %s", date, end_time);
+        //our custom time from date picker?
+        Timestamp start_time_ts = Timestamp.valueOf(start_time_string);
+        Timestamp end_time_ts = Timestamp.valueOf(end_time_string);
+
+
         String sessionName = mEditTextSessionName.getText().toString().trim();
         String description = mEditTextDescription.getText().toString().trim();
-        String sessionDate = mTextViewDate.getText().toString().trim();
-        Date sessionDateDate = new SimpleDateFormat("dd/MM/yyyy").parse(sessionDate);
 
-        mEditTextModule
-
-        SessionsModel newSession = new SessionsModel(sessionName, startTimeTimestamp, endTimeTimestamp, description, sessionDateDate);
+        SessionsModel newSession = new SessionsModel(sessionName, description, 1, 1, start_time_ts, end_time_ts);
+        ClassScheduleApi client = ClassScheduleClient.getClient();
         Call<SessionsModel> call = client.createNewSession(newSession);
-        call.enqueue(new Callback<List<SessionsModel>>() {
+        call.enqueue(new Callback<SessionsModel>() {
+
             @Override
-            public void onResponse(Call<List<SessionsModel>> call, Response<List<SessionsModel>> response) {
+            public void onResponse(Call<SessionsModel> call, Response<SessionsModel> response) {
                 hideProgressBar();
-                if(response.isSuccessful()){
-                    Log.d(TAG, String.valueOf(mSessionList));
-                    //toggle the recyclerview visibility
-                } else {
-                    hideProgressBar();
-                    showUnsuccessfulMessage();
+                if (response.isSuccessful()) {
+                    Toast.makeText(CreateSessionActivity.this, "200", Toast.LENGTH_SHORT).show();
+                }
+
+                if (response.code() == 401) {
+                    Toast.makeText(CreateSessionActivity.this, "401", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
-            public void onFailure(Call<List<SessionsModel>> call, Throwable t) {
+            public void onFailure(Call<SessionsModel> call, Throwable t) {
                 hideProgressBar();
                 showFailureMessage();
                 Log.d(TAG, "on failure", t);
             }
+
         });
     }
 
@@ -234,5 +232,6 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
     private void hideProgressBar() {
 
     }
+
 
 }
