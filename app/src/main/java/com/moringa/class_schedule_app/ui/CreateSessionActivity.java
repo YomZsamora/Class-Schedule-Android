@@ -1,7 +1,6 @@
 package com.moringa.class_schedule_app.ui;
 
 
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -18,7 +17,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import android.widget.TimePicker;
 
 import androidx.annotation.RequiresApi;
@@ -27,14 +25,14 @@ import androidx.fragment.app.DialogFragment;
 
 import com.moringa.class_schedule_app.R;
 import com.moringa.class_schedule_app.fragments.FragmentDate;
-import com.moringa.class_schedule_app.fragments.TimeFragment;
 import com.moringa.class_schedule_app.models.SessionsModel;
 import com.moringa.class_schedule_app.services.ClassScheduleApi;
 import com.moringa.class_schedule_app.services.ClassScheduleClient;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -118,6 +116,11 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
     @Override
     public void onClick(View view) {
         if (view == mSubmitButton) {
+            try {
+                createNewSession();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             Intent intent = new Intent(CreateSessionActivity.this, HomeActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
@@ -184,19 +187,27 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
         activeTime = null;
     }
 
-    private void createNewSession() {
+    private void createNewSession() throws ParseException {
         ClassScheduleApi client = ClassScheduleClient.getClient();
         String startTime = mTextViewStartTime.getText().toString().trim();
         Timestamp startTimeTimestamp = Timestamp.valueOf(startTime);
+        String endTime = mTextViewEndTime.getText().toString().trim();
+        Timestamp endTimeTimestamp = Timestamp.valueOf(endTime);
         String sessionName = mEditTextSessionName.getText().toString().trim();
-        SessionsModel newSession = new SessionsModel(sessionName, de);
+        String description = mEditTextDescription.getText().toString().trim();
+        String sessionDate = mTextViewDate.getText().toString().trim();
+        Date sessionDateDate = new SimpleDateFormat("dd/MM/yyyy").parse(sessionDate);
+
+        mEditTextModule
+
+        SessionsModel newSession = new SessionsModel(sessionName, startTimeTimestamp, endTimeTimestamp, description, sessionDateDate);
         Call<SessionsModel> call = client.createNewSession(newSession);
         call.enqueue(new Callback<List<SessionsModel>>() {
             @Override
             public void onResponse(Call<List<SessionsModel>> call, Response<List<SessionsModel>> response) {
                 hideProgressBar();
                 if(response.isSuccessful()){
-                    Log.d(TAG, String.valueOf(mSessionsList));
+                    Log.d(TAG, String.valueOf(mSessionList));
                     //toggle the recyclerview visibility
                 } else {
                     hideProgressBar();
