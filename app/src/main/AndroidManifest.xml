@@ -28,7 +28,6 @@
             android:name=".ui.TmSignUpActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".ui.SessionDetailsActivity" />
-        <activity android:name=".ui.MainActivity" />
         <activity
             android:name=".ui.StudentSignUpActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -36,7 +35,6 @@
             android:name=".ui.LoginActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
         <activity android:name=".ui.HomeActivity" />
-        <activity android:name=".ui.PostSessionActivity" />
     </application>
 
 </manifest>
