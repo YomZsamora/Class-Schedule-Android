@@ -144,6 +144,7 @@ public class TmSignUpActivity extends AppCompatActivity implements View.OnClickL
                 .setDisplayName(mName)
                 .build();
 
+
         user.updateProfile(addProfileName)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
 
