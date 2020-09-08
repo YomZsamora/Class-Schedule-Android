@@ -5,21 +5,36 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:background="@color/colorSecondaryLight"
+    android:orientation="vertical"
     tools:context="com.moringa.class_schedule_app.ui.CreateSessionActivity">
 
     <LinearLayout
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <TextView
-            android:id="@+id/loginTextView"
+        <LinearLayout
+            android:layout_weight="2"
             android:layout_width="wrap_content"
-            android:fontFamily="@font/muli_bold"
             android:layout_height="wrap_content"
-            android:text="Add a new session"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/loginTextView"
+                android:layout_width="wrap_content"
+                android:fontFamily="@font/muli_bold"
+                android:layout_height="wrap_content"
+                android:text="Add a new session"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="2dp"
+                android:src="@drawable/title_underline"/>
+        </LinearLayout>
+
 
         <ImageView
             android:id="@+id/plannerImageView"
@@ -32,119 +47,145 @@
 
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="30dip"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
+        android:padding="20dip"
         android:id="@+id/linearLayout">
 
         <EditText
             android:id="@+id/editTextSessionName"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:background="@drawable/circular_corners"
             android:hint="Session name"
             android:nextFocusDown="@+id/submitButton"
             android:padding="10dip"
-            android:layout_marginBottom="10dip"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/colorDivider"
-            android:textSize="15sp"/>
+            android:fontFamily="@font/muli"
+            android:layout_marginBottom="20dip"
+            android:textColor="@color/colorSecondaryDark"
+            android:textColorHint="@color/colorSecondaryDark"
+            android:textSize="14sp"/>
 
-        <TextView
-            android:id="@+id/textViewStartTime"
-            android:layout_width="145dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/circular_corners"
-            android:hint="Start Time"
-            android:nextFocusDown="@+id/submitButton"
-            android:padding="10dip"
-            android:layout_marginBottom="10dp"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/colorDivider"
-            android:textSize="15sp"/>
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/textViewStartTime"
+                    android:layout_width="125dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/circular_corners"
+                    android:hint="Start Time"
+                    android:fontFamily="@font/muli"
+                    android:nextFocusDown="@+id/submitButton"
+                    android:padding="10dip"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/colorSecondaryDark"
+                    android:textColorHint="@color/colorSecondaryDark"
+                    android:textSize="14sp"/>
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/textViewEndTime"
-            android:layout_width="145dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/circular_corners"
-            android:hint="End Time"
-            android:nextFocusDown="@+id/submitButton"
-            android:padding="10dip"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="-50dp"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/colorDivider"
-            android:textSize="15sp"
-            android:layout_marginStart="150dp"/>
+            <TextView
+                android:id="@+id/textViewEndTime"
+                android:layout_width="125dp"
+                android:layout_height="50dp"
+                android:background="@drawable/circular_corners"
+                android:hint="End Time"
+                android:fontFamily="@font/muli"
+                android:nextFocusDown="@+id/submitButton"
+                android:padding="10dip"
+                android:textColor="@color/colorSecondaryDark"
+                android:textColorHint="@color/colorSecondaryDark"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/textViewDate"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_width="125dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/circular_corners"
             android:hint="Date"
+            android:fontFamily="@font/muli"
             android:padding="10dip"
-            android:layout_marginBottom="10dp"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/colorDivider"
-            android:textSize="15sp"/>
+            android:textColor="@color/colorSecondaryDark"
+            android:textColorHint="@color/colorSecondaryDark"
+            android:textSize="14sp"/>
 
-        <Spinner
-            android:id="@+id/cohort_spinner"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/circular_corners"
-            android:hint="@string/cohort"
-            android:inputType="textEmailAddress"
-            android:nextFocusDown="@+id/submitButton"
-            android:padding="10dip"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/colorDivider"
-            android:textSize="15sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content">
+                <Spinner
+                    android:id="@+id/cohort_spinner"
+                    android:layout_width="125dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/circular_corners"
+                    android:hint="@string/cohort"
+                    android:inputType="textEmailAddress"
+                    android:nextFocusDown="@+id/submitButton"
+                    android:padding="10dip"
+                    android:textColor="@color/colorSecondaryDark"
+                    android:textColorHint="@color/colorSecondaryDark"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+            <Spinner
+                android:id="@+id/editTextModule"
+                android:layout_width="125dp"
+                android:layout_height="50dp"
+                android:background="@drawable/circular_corners"
+                android:hint="Module"
+                android:inputType="text"
+                android:nextFocusDown="@+id/submitButton"
+                android:padding="10dip"
+                android:textColor="@color/colorSecondaryDark"
+                android:textColorHint="@color/colorSecondaryDark"
+                android:textSize="14sp"/>
+        </LinearLayout>
 
-        <Spinner
-            android:id="@+id/editTextModule"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:background="@drawable/circular_corners"
-            android:hint="Module"
-            android:inputType="text"
-            android:nextFocusDown="@+id/submitButton"
-            android:padding="10dip"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="-50dp"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/colorDivider"
-            android:textSize="15sp"
-            android:layout_marginStart="150dp"/>
 
         <EditText
             android:id="@+id/editTextDescription"
-            android:layout_width="fill_parent"
+            android:background="@drawable/circular_corners"
+            android:layout_width="match_parent"
             android:layout_height="100dp"
             android:hint="Brief session description"
-            android:inputType="text"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:fontFamily="@font/muli"
             android:nextFocusDown="@+id/submitButton"
             android:padding="10dip"
-            android:layout_marginBottom="10dp"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/colorDivider"
-            android:textSize="15sp" />
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/colorSecondaryDark"
+            android:textColorHint="@color/colorSecondaryDark"
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/submitButton"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:fontFamily="@font/muli_bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="Submit"
             android:background="@drawable/primary_button"
-            android:layout_marginTop="15dp"
             android:textColor="@color/colorTextIcons" />
+
 
     </LinearLayout>
 
