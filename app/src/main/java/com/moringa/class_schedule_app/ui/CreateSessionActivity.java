@@ -217,7 +217,7 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
         //Timestamp testEndTime = Timestamp.valueOf(sdf.parse(end_time_string).toString());
 
         //getting the int tag from the selected the spinner item
-        Integer cohortId = mCohortSpinner.getSelectedItemPosition();
+        Integer cohortId = mCohortSpinner.getSelectedItemPosition() + 1; //spinner lists use indices [0,1,...,n] so we add one to get position
 
         String sessionName = mEditTextSessionName.getText().toString().trim();
         String description = mEditTextDescription.getText().toString().trim();
@@ -233,7 +233,7 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
                 if (response.isSuccessful()) {
                     Toast.makeText(CreateSessionActivity.this, "Session created successfully", Toast.LENGTH_SHORT).show();
                     SessionsModel debugSession = response.body();
-                    Log.d(TAG, String.format("New session : %s", debugSession));
+                    Log.d(TAG, String.format("Cohort id : %s", cohortId));
                 }
 
                 if (response.code() == 401) {
