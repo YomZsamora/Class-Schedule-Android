@@ -59,7 +59,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/muli_bold"
-                        android:textColor="@color/colorPrimaryLight"
+                        android:textColor="@color/colorPrimary"
                         android:gravity="center_vertical"
                         android:textSize="18sp"
                         android:text="Available sessions" />
