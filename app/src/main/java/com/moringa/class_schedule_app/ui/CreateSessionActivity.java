@@ -209,11 +209,12 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
 
         //getting the int tag from the selected the spinner item
         Integer cohortId = mCohortSpinner.getSelectedItemPosition() + 1; //spinner lists use indices [0,1,...,n] so we add one to get position
+        Integer moduleId = mModuleSpinner.getSelectedItemPosition() +1;
 
         String sessionName = mEditTextSessionName.getText().toString().trim();
         String description = mEditTextDescription.getText().toString().trim();
 
-        SessionsModel newSession = new SessionsModel(sessionName, description, cohortId, 1, testStartTime, testEndTime);
+        SessionsModel newSession = new SessionsModel(sessionName, description, cohortId, moduleId, testStartTime, testEndTime);
         ClassScheduleApi client = ClassScheduleClient.getClient();
         Call<SessionsModel> call = client.createNewSession(newSession);
         call.enqueue(new Callback<SessionsModel>() {
