@@ -153,6 +153,7 @@ public class TmSignUpActivity extends AppCompatActivity implements View.OnClickL
 //                            Log.d(TAG, user.getDisplayName());
                         }
                     }
+
                 });
     }
 

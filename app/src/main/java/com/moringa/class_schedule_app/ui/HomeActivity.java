@@ -64,9 +64,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
             finish();
             startActivity(intent);
-        } else if(id == R.id.action_profile) {
-            Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
-            startActivity(intent);
         }
         return true;
     }

@@ -1,9 +1,9 @@
 package com.moringa.class_schedule_app.ui;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.moringa.class_schedule_app.R;
 import com.moringa.class_schedule_app.models.SessionsModel;
