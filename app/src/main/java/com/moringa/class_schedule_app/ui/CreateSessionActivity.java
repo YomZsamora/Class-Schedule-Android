@@ -52,7 +52,7 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
     @BindView(R.id.textViewEndTime) TextView mTextViewEndTime;
     @BindView(R.id.textViewDate) TextView mTextViewDate;
     @BindView(R.id.cohort_spinner) Spinner mCohortSpinner;
-    @BindView(R.id.editTextModule) EditText mEditTextModule;
+    @BindView(R.id.editTextModule) Spinner mModuleSpinner;
     @BindView(R.id.editTextDescription) EditText mEditTextDescription;
 
     private Calendar start_time;
@@ -68,32 +68,23 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_session);
+        ButterKnife.bind(this);
 
         //we initialize both times
         start_time = Calendar.getInstance();
         end_time = Calendar.getInstance();
 
-        Spinner cohortSpinner = findViewById(R.id.cohort_spinner);
+        //cohort spinner
+        populateCohortSpinner();
+        mCohortSpinner.setOnItemSelectedListener(this);
+        //module spinner
+        populateModuleSpinner();
+        mModuleSpinner.setOnItemSelectedListener(this);
 
-        //initailize the spinner with list
-        List<StringWithTag> cohortList = new ArrayList<>();
-        cohortList.add(new StringWithTag("MC30", 1));
-        cohortList.add(new StringWithTag("MC29", 2));
-        cohortList.add(new StringWithTag("MC28", 3));
-        cohortList.add(new StringWithTag("MC27", 4));
-        ArrayAdapter<StringWithTag> cohortAdapter = new ArrayAdapter<StringWithTag>(this, android.R.layout.simple_spinner_item, cohortList);
-
-       // ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cohorts, android.R.layout.simple_spinner_item);
-        cohortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        cohortSpinner.setAdapter((cohortAdapter));
-        cohortSpinner.setOnItemSelectedListener(this);
-
-        ButterKnife.bind(this);
         mSubmitButton.setOnClickListener((View.OnClickListener) this);
         mEditTextSessionName.setOnClickListener((View.OnClickListener) this);
         mTextViewStartTime.setOnClickListener((View.OnClickListener)this);
         mTextViewEndTime.setOnClickListener((View.OnClickListener) this);
-        mEditTextModule.setOnClickListener((View.OnClickListener) this);
         mEditTextDescription.setOnClickListener((View.OnClickListener) this);
         mTextViewDate.setOnClickListener((View.OnClickListener)this);
 
@@ -263,5 +254,28 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
 
     }
 
+    public void populateCohortSpinner() {
+        //initialize the spinner with cohort list
+        List<StringWithTag> cohortList = new ArrayList<>();
+        cohortList.add(new StringWithTag("MC30", 1));
+        cohortList.add(new StringWithTag("MC29", 2));
+        cohortList.add(new StringWithTag("MC28", 3));
+        cohortList.add(new StringWithTag("MC27", 4));
+        ArrayAdapter<StringWithTag> cohortAdapter = new ArrayAdapter<StringWithTag>(this, android.R.layout.simple_spinner_item, cohortList);
+
+        // ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cohorts, android.R.layout.simple_spinner_item);
+        cohortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mCohortSpinner.setAdapter((cohortAdapter));
+    }
+
+    public void populateModuleSpinner() {
+        List<StringWithTag> moduleList = new ArrayList<>();
+        moduleList.add(new StringWithTag("Angular", 1));
+        moduleList.add(new StringWithTag("Android", 2));
+        moduleList.add(new StringWithTag("Full Stack", 3));
+        ArrayAdapter<StringWithTag> moduleAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, moduleList);
+        moduleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mCohortSpinner.setAdapter(moduleAdapter);
+    }
 
 }
