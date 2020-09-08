@@ -51,8 +51,8 @@ public class ProfileActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    mUsername.setText(user.getDisplayName());
-                    mEmail.setText(user.getEmail());
+//                    mUsername.setText(user.getDisplayName());
+//                    mEmail.setText(user.getEmail());
                 }
             }
         };
