@@ -1,7 +1,6 @@
 package com.moringa.class_schedule_app.ui;
 
 
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -9,6 +8,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,8 +17,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,24 +26,33 @@ import androidx.fragment.app.DialogFragment;
 
 import com.moringa.class_schedule_app.R;
 import com.moringa.class_schedule_app.fragments.FragmentDate;
-import com.moringa.class_schedule_app.fragments.TimeFragment;
+import com.moringa.class_schedule_app.models.SessionsModel;
+import com.moringa.class_schedule_app.models.StringWithTag;
+import com.moringa.class_schedule_app.services.ClassScheduleApi;
+import com.moringa.class_schedule_app.services.ClassScheduleClient;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CreateSessionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener, DatePickerDialog.OnDateSetListener {
+    public static final String TAG = LoginActivity.class.getSimpleName();
     @BindView(R.id.submitButton) Button mSubmitButton;
     @BindView(R.id.editTextSessionName) EditText mEditTextSessionName;
     @BindView(R.id.textViewStartTime) TextView mTextViewStartTime;
     @BindView(R.id.textViewEndTime) TextView mTextViewEndTime;
     @BindView(R.id.textViewDate) TextView mTextViewDate;
     @BindView(R.id.cohort_spinner) Spinner mCohortSpinner;
-    @BindView(R.id.editTextModule) EditText mEditTextModule;
+    @BindView(R.id.editTextModule) Spinner mModuleSpinner;
     @BindView(R.id.editTextDescription) EditText mEditTextDescription;
 
     private Calendar start_time;
@@ -59,23 +68,23 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_session);
+        ButterKnife.bind(this);
 
         //we initialize both times
         start_time = Calendar.getInstance();
         end_time = Calendar.getInstance();
 
-        Spinner spinner = findViewById(R.id.cohort_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cohorts, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter((adapter));
-        spinner.setOnItemSelectedListener(this);
+        //cohort spinner
+        populateCohortSpinner();
+        mCohortSpinner.setOnItemSelectedListener(this);
+        //module spinner
+        populateModuleSpinner();
+        mModuleSpinner.setOnItemSelectedListener(this);
 
-        ButterKnife.bind(this);
         mSubmitButton.setOnClickListener((View.OnClickListener) this);
         mEditTextSessionName.setOnClickListener((View.OnClickListener) this);
         mTextViewStartTime.setOnClickListener((View.OnClickListener)this);
         mTextViewEndTime.setOnClickListener((View.OnClickListener) this);
-        mEditTextModule.setOnClickListener((View.OnClickListener) this);
         mEditTextDescription.setOnClickListener((View.OnClickListener) this);
         mTextViewDate.setOnClickListener((View.OnClickListener)this);
 
@@ -86,7 +95,8 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
-
+        StringWithTag s = (StringWithTag) parent.getItemAtPosition(position);
+        Object tag = s.tag;
     }
 
     @Override
@@ -100,7 +110,7 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        String currentDateString = dayOfMonth + "/" + month + "/" + year;
+        String currentDateString = year + "-" + month + "-" + dayOfMonth;
         mTextViewDate.setText(currentDateString);
 
     }
@@ -108,6 +118,11 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
     @Override
     public void onClick(View view) {
         if (view == mSubmitButton) {
+            try {
+                createNewSession();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             Intent intent = new Intent(CreateSessionActivity.this, HomeActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
@@ -149,7 +164,7 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
     }
 
     private void updateDisplay(TextView dateDisplay, Calendar time) {
-        dateDisplay.setText(String.format("%s:%s", time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE)));
+        dateDisplay.setText(String.format("%s:%s:00.00", time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE)));
     }
 
     private void showTimeDialog(TextView timeDisplay, Calendar time) {
@@ -172,6 +187,96 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
     private void unregisterTimeDisplay() {
         activeDisplay = null;
         activeTime = null;
+    }
+
+    private void createNewSession() throws ParseException {
+        // valueOf() method returns a Timestamp value corresponding to the given string
+        String date= mTextViewDate.getText().toString().trim(); //"2020-08-27";  //our custom time from date picker?
+        String start_time=mTextViewStartTime.getText().toString().trim(); //"16:01:15";  //our custom time from date picker?
+        String end_time= mTextViewEndTime.getText().toString().trim(); //"16:01:15";
+        String start_time_string = String.format("%s %s", date, start_time);
+        String end_time_string = String.format("%s %s", date, end_time);
+        //our custom time from date picker?
+//        Timestamp start_time_ts = Timestamp.valueOf(start_time_string);
+//        Timestamp end_time_ts = Timestamp.valueOf(end_time_string);
+
+        //convert our timestamp to the required format
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Timestamp testStartTime = new Timestamp(sdf.parse(start_time_string).getTime());
+        Timestamp testEndTime = new Timestamp(sdf.parse(end_time_string).getTime());
+//        Timestamp testStartTime = Timestamp.valueOf(sdf.parse(start_time_string).toString());
+        //Timestamp testEndTime = Timestamp.valueOf(sdf.parse(end_time_string).toString());
+
+        //getting the int tag from the selected the spinner item
+        Integer cohortId = mCohortSpinner.getSelectedItemPosition() + 1; //spinner lists use indices [0,1,...,n] so we add one to get position
+        Integer moduleId = mModuleSpinner.getSelectedItemPosition() +1;
+
+        String sessionName = mEditTextSessionName.getText().toString().trim();
+        String description = mEditTextDescription.getText().toString().trim();
+
+        SessionsModel newSession = new SessionsModel(sessionName, description, cohortId, moduleId, testStartTime, testEndTime);
+        ClassScheduleApi client = ClassScheduleClient.getClient();
+        Call<SessionsModel> call = client.createNewSession(newSession);
+        call.enqueue(new Callback<SessionsModel>() {
+
+            @Override
+            public void onResponse(Call<SessionsModel> call, Response<SessionsModel> response) {
+                hideProgressBar();
+                if (response.isSuccessful()) {
+                    Toast.makeText(CreateSessionActivity.this, "Session created successfully", Toast.LENGTH_SHORT).show();
+                    SessionsModel debugSession = response.body();
+                    Log.d(TAG, String.format("Cohort id : %s", cohortId));
+                }
+
+                if (response.code() == 401) {
+                    Toast.makeText(CreateSessionActivity.this, "Something went wrong, try again", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SessionsModel> call, Throwable t) {
+                hideProgressBar();
+                showFailureMessage();
+                Log.d(TAG, "on failure", t);
+            }
+
+        });
+    }
+
+    private void showFailureMessage() {
+
+    }
+
+    private void showUnsuccessfulMessage() {
+
+    }
+
+    private void hideProgressBar() {
+
+    }
+
+    public void populateCohortSpinner() {
+        //initialize the spinner with cohort list
+        List<StringWithTag> cohortList = new ArrayList<>();
+        cohortList.add(new StringWithTag("MC30", 1));
+        cohortList.add(new StringWithTag("MC29", 2));
+        cohortList.add(new StringWithTag("MC28", 3));
+        cohortList.add(new StringWithTag("MC27", 4));
+        ArrayAdapter<StringWithTag> cohortAdapter = new ArrayAdapter<StringWithTag>(this, android.R.layout.simple_spinner_item, cohortList);
+
+        // ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cohorts, android.R.layout.simple_spinner_item);
+        cohortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mCohortSpinner.setAdapter((cohortAdapter));
+    }
+
+    public void populateModuleSpinner() {
+        List<StringWithTag> moduleList = new ArrayList<>();
+        moduleList.add(new StringWithTag("Angular", 1));
+        moduleList.add(new StringWithTag("Android", 2));
+        moduleList.add(new StringWithTag("Full Stack", 3));
+        ArrayAdapter<StringWithTag> moduleAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, moduleList);
+        moduleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mModuleSpinner.setAdapter(moduleAdapter);
     }
 
 }
