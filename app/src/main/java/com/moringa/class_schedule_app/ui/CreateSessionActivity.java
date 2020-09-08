@@ -276,7 +276,7 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
         moduleList.add(new StringWithTag("Full Stack", 3));
         ArrayAdapter<StringWithTag> moduleAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, moduleList);
         moduleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mCohortSpinner.setAdapter(moduleAdapter);
+        mModuleSpinner.setAdapter(moduleAdapter);
     }
 
 }
