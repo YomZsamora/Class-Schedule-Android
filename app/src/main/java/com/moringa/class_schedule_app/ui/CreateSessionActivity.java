@@ -27,11 +27,16 @@ import androidx.fragment.app.DialogFragment;
 import com.moringa.class_schedule_app.R;
 import com.moringa.class_schedule_app.fragments.FragmentDate;
 import com.moringa.class_schedule_app.models.SessionsModel;
+import com.moringa.class_schedule_app.models.StringWithTag;
 import com.moringa.class_schedule_app.services.ClassScheduleApi;
 import com.moringa.class_schedule_app.services.ClassScheduleClient;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -69,9 +74,18 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
         end_time = Calendar.getInstance();
 
         Spinner spinner = findViewById(R.id.cohort_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cohorts, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter((adapter));
+
+        //initailize the spinner with list
+        List<StringWithTag> cohortList = new ArrayList<>();
+        cohortList.add(new StringWithTag("MC30", 1));
+        cohortList.add(new StringWithTag("MC29", 2));
+        cohortList.add(new StringWithTag("MC28", 3));
+        cohortList.add(new StringWithTag("MC27", 4));
+        ArrayAdapter<StringWithTag> cohortAdapter = new ArrayAdapter<StringWithTag>(this, android.R.layout.simple_spinner_item, cohortList);
+
+       // ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cohorts, android.R.layout.simple_spinner_item);
+        cohortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter((cohortAdapter));
         spinner.setOnItemSelectedListener(this);
 
         ButterKnife.bind(this);
@@ -90,7 +104,8 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
-
+        StringWithTag s = (StringWithTag) parent.getItemAtPosition(position);
+        Object tag = s.tag;
     }
 
     @Override
@@ -112,7 +127,11 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
     @Override
     public void onClick(View view) {
         if (view == mSubmitButton) {
-            createNewSession();
+            try {
+                createNewSession();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             Intent intent = new Intent(CreateSessionActivity.this, HomeActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
@@ -154,7 +173,7 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
     }
 
     private void updateDisplay(TextView dateDisplay, Calendar time) {
-        dateDisplay.setText(String.format("%s:%s", time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE)));
+        dateDisplay.setText(String.format("%s:%s:00.00", time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE)));
     }
 
     private void showTimeDialog(TextView timeDisplay, Calendar time) {
@@ -179,22 +198,31 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
         activeTime = null;
     }
 
-    private void createNewSession() {
+    private void createNewSession() throws ParseException {
         // valueOf() method returns a Timestamp value corresponding to the given string
-        String date=mTextViewDate.getText().toString().trim(); //"2020-08-27";  //our custom time from date picker?
+        String date= mTextViewDate.getText().toString().trim(); //"2020-08-27";  //our custom time from date picker?
         String start_time=mTextViewStartTime.getText().toString().trim(); //"16:01:15";  //our custom time from date picker?
         String end_time= mTextViewEndTime.getText().toString().trim(); //"16:01:15";
         String start_time_string = String.format("%s %s", date, start_time);
         String end_time_string = String.format("%s %s", date, end_time);
         //our custom time from date picker?
-        Timestamp start_time_ts = Timestamp.valueOf(start_time_string);
-        Timestamp end_time_ts = Timestamp.valueOf(end_time_string);
+//        Timestamp start_time_ts = Timestamp.valueOf(start_time_string);
+//        Timestamp end_time_ts = Timestamp.valueOf(end_time_string);
 
+        //convert our timestamp to the required format
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Timestamp testStartTime = new Timestamp(sdf.parse(start_time_string).getTime());
+        Timestamp testEndTime = new Timestamp(sdf.parse(end_time_string).getTime());
+//        Timestamp testStartTime = Timestamp.valueOf(sdf.parse(start_time_string).toString());
+        //Timestamp testEndTime = Timestamp.valueOf(sdf.parse(end_time_string).toString());
+
+        //getting the int tag from the selected the spinner item
+        Integer cohortId = mCohortSpinner.getSelectedItemPosition();
 
         String sessionName = mEditTextSessionName.getText().toString().trim();
         String description = mEditTextDescription.getText().toString().trim();
 
-        SessionsModel newSession = new SessionsModel(sessionName, description, 1, 1, start_time_ts, end_time_ts);
+        SessionsModel newSession = new SessionsModel(sessionName, description, cohortId, 1, testStartTime, testEndTime);
         ClassScheduleApi client = ClassScheduleClient.getClient();
         Call<SessionsModel> call = client.createNewSession(newSession);
         call.enqueue(new Callback<SessionsModel>() {
@@ -203,11 +231,13 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
             public void onResponse(Call<SessionsModel> call, Response<SessionsModel> response) {
                 hideProgressBar();
                 if (response.isSuccessful()) {
-                    Toast.makeText(CreateSessionActivity.this, "200", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateSessionActivity.this, "Session created successfully", Toast.LENGTH_SHORT).show();
+                    SessionsModel debugSession = response.body();
+                    Log.d(TAG, String.format("New session : %s", debugSession));
                 }
 
                 if (response.code() == 401) {
-                    Toast.makeText(CreateSessionActivity.this, "401", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateSessionActivity.this, "Something went wrong, try again", Toast.LENGTH_SHORT).show();
                 }
             }
 
