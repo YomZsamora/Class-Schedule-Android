@@ -11,7 +11,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.moringa.class_schedule_app.R;
 import com.moringa.class_schedule_app.fragments.FragmentContact;
 import com.moringa.class_schedule_app.fragments.FragmentHome;
-import com.moringa.class_schedule_app.fragments.FragmentNotification;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to

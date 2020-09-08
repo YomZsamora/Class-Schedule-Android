@@ -10,22 +10,117 @@
 
     <View
         android:id="@+id/rectangle_1"
-        android:layout_width="406dp"
+        android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:layout_marginTop="-24dp"
         android:layout_gravity="center"
-        android:background="@drawable/primary_button"/>
+        android:background="@drawable/profile_bg"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/profile_pic" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/profileUserName"
+                android:layout_weight="2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:text="Ben Ruwel"
+                android:fontFamily="@font/muli"/>
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="-40dp"
-        android:layout_marginStart="8dp"
-        android:src="@drawable/profile_pic" />
+            <TextView
+                android:id="@+id/profileEmail"
+                android:layout_weight="2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/colorSecondaryDark"
+                android:text="ben@awol.com"
+                android:fontFamily="@font/muli"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/muli_bold"
+            android:textColor="@color/colorPrimaryLight"
+            android:gravity="center_vertical"
+            android:textSize="18sp"
+            android:text="User profile" />
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="2dp"
+            android:src="@drawable/title_underline"/>
+
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cohort:"
+                android:textSize="16sp"
+                android:textColor="@color/colorSecondaryDark"
+                android:fontFamily="@font/muli_bold"/>
+            <TextView
+                android:layout_weight="3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MC30"
+                android:textSize="16sp"
+                android:textColor="@color/colorSecondaryDark"
+                android:fontFamily="@font/muli"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Module:"
+                android:textSize="16sp"
+                android:textColor="@color/colorSecondaryDark"
+                android:fontFamily="@font/muli_bold"/>
+            <TextView
+                android:layout_weight="3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Android"
+                android:textSize="16sp"
+                android:textColor="@color/colorSecondaryDark"
+                android:fontFamily="@font/muli"/>
+        </LinearLayout>
 
     </LinearLayout>
 
