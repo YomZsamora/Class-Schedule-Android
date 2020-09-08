@@ -73,7 +73,7 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
         start_time = Calendar.getInstance();
         end_time = Calendar.getInstance();
 
-        Spinner spinner = findViewById(R.id.cohort_spinner);
+        Spinner cohortSpinner = findViewById(R.id.cohort_spinner);
 
         //initailize the spinner with list
         List<StringWithTag> cohortList = new ArrayList<>();
@@ -85,8 +85,8 @@ public class CreateSessionActivity extends AppCompatActivity implements AdapterV
 
        // ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cohorts, android.R.layout.simple_spinner_item);
         cohortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter((cohortAdapter));
-        spinner.setOnItemSelectedListener(this);
+        cohortSpinner.setAdapter((cohortAdapter));
+        cohortSpinner.setOnItemSelectedListener(this);
 
         ButterKnife.bind(this);
         mSubmitButton.setOnClickListener((View.OnClickListener) this);
