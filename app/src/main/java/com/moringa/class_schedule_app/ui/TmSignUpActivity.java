@@ -93,7 +93,7 @@ public class TmSignUpActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void createNewUser() {
-        final String mName = mEditTextName.getText().toString().trim();
+        mName = mEditTextName.getText().toString().trim();
         final String email = mEditTextEmail.getText().toString().trim();
         String password = mEditTextPassword.getText().toString().trim();
         String confirmPassword = mEditTextConfirmPassword.getText().toString().trim();
