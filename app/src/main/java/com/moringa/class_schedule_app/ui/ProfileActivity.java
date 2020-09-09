@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -11,6 +12,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.moringa.class_schedule_app.R;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -21,11 +23,13 @@ public class ProfileActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authStateListener;
+    private static final String TAG  = ProfileActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        ButterKnife.bind(this);
 
         authStateListener();
     }
@@ -51,8 +55,9 @@ public class ProfileActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-//                    mUsername.setText(user.getDisplayName());
-//                    mEmail.setText(user.getEmail());
+                    Log.d(TAG, String.format("Username : %s", user.getDisplayName()));
+                    mUsername.setText(user.getDisplayName());
+                    mEmail.setText(user.getEmail());
                 }
             }
         };
