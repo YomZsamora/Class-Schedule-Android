@@ -17,7 +17,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/muli_bold"
-                android:textColor="@color/colorPrimaryLight"
+                android:textColor="@color/colorPrimary"
                 android:gravity="center_vertical"
                 android:textSize="18sp"
                 android:text="Students" />
@@ -45,7 +45,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/studentsContactList"
                 android:visibility="gone"
-                android:scrollbarThumbVertical="@color/colorPrimaryLight"
+                android:scrollbarThumbVertical="@color/colorPrimary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"
@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/muli_bold"
-                android:textColor="@color/colorPrimaryLight"
+                android:textColor="@color/colorPrimary"
                 android:gravity="center_vertical"
                 android:textSize="18sp"
                 android:text="Technical Mentors" />
