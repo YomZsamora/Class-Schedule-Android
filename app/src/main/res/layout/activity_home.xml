@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorSecondaryLight"
     android:layout_height="match_parent"
     tools:context=".ui.HomeActivity">
     <LinearLayout
@@ -27,14 +28,15 @@
 <!--            android:background="@color/white"/>-->
 
         <com.google.android.material.tabs.TabLayout
+            android:elevation="2.5dp"
             android:id="@+id/tabs"
-            android:theme="@style/ThemeOverlay.AppCompat.Light"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             app:tabIndicatorColor="@color/colorPrimary"
             app:tabSelectedTextColor="@color/colorPrimary"
             app:tabTextColor="@color/colorSecondary"
             app:tabIndicatorHeight="2dp"
+            android:layout_marginBottom="2.5dp"
             app:tabIndicatorFullWidth="false"
             android:background="@color/white" />
     </LinearLayout>

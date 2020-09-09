@@ -1,21 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:gravity="center"
     android:background="@color/colorSecondaryLight"
+    android:orientation="vertical"
     tools:context="com.moringa.class_schedule_app.ui.TmSignUpActivity">
 
-    <TextView
-        android:id="@+id/loginTextView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create Technical Mentor Account"
-        android:textColor="@color/colorSecondaryDark"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_above="@+id/linearLayout"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/loginTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create Technical Mentor Account"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:fontFamily="@font/muli_bold"
+                android:textStyle="bold" />
+            <ImageView
+                android:layout_width="170dp"
+                android:layout_height="2dp"
+                android:src="@color/colorPrimary"/>
+        </LinearLayout>
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/planner"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -29,63 +51,69 @@
         <EditText
             android:id="@+id/editTextName"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:fontFamily="@font/muli"
             android:background="@drawable/circular_corners"
             android:hint="Enter name"
             android:nextFocusDown="@+id/passwordEditText"
             android:padding="10dip"
             android:layout_marginBottom="10dip"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/colorDivider"
-            android:textSize="20sp"/>
+            android:textColor="@color/colorSecondaryDark"
+            android:textColorHint="@color/colorSecondaryDark"
+            android:textSize="14sp"/>
 
         <EditText
             android:id="@+id/editTextEmail"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:background="@drawable/circular_corners"
             android:hint="Email Address"
+            android:fontFamily="@font/muli"
             android:inputType="textEmailAddress"
             android:nextFocusDown="@+id/cohort_spinner"
             android:padding="10dip"
             android:layout_marginBottom="10dp"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/colorDivider"
-            android:textSize="20sp"/>
+            android:textColor="@color/colorSecondaryDark"
+            android:textColorHint="@color/colorSecondaryDark"
+            android:textSize="14sp"/>
 
         <EditText
             android:id="@+id/editTextPassword"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:background="@drawable/circular_corners"
+            android:fontFamily="@font/muli"
             android:hint="Enter Password"
             android:inputType="textPassword"
             android:nextFocusDown="@+id/passwordEditText"
             android:padding="10dip"
             android:layout_marginBottom="10dp"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/colorDivider"
-            android:textSize="20sp" />
+            android:textColor="@color/colorSecondaryDark"
+            android:textColorHint="@color/colorSecondaryDark"
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/editTextConfirmPassword"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:background="@drawable/circular_corners"
+            android:fontFamily="@font/muli"
             android:hint="Confirm Password"
             android:inputType="textPassword"
             android:nextFocusDown="@+id/passwordEditText"
             android:padding="10dip"
             android:layout_marginBottom="10dp"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/colorDivider"
-            android:textSize="20sp" />
+            android:textColor="@color/colorSecondaryDark"
+            android:textColorHint="@color/colorSecondaryDark"
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/createAccountButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            android:fontFamily="@font/muli_bold"
+            android:textAllCaps="false"
             android:text="Create Account"
             android:background="@drawable/primary_button"
             android:layout_marginTop="15dp"
@@ -95,11 +123,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textColor="@color/colorPrimaryText"
+            android:textColor="@color/colorSecondaryDark"
+            android:fontFamily="@font/muli"
             android:textStyle="bold"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:text="Already have an account? Login"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>
